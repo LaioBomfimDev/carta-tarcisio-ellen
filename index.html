@@ -3,48 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#34241b" />
-    <meta
-      name="description"
-      content="Convite de casamento de Eliel Santos e Anne Daise — 21 de abril de 2027."
-    />
+    <meta name="theme-color" content="#2f1e15" />
+    <meta name="description" content="Convite de casamento de Eliel Santos e Anne Daise — 21 de abril de 2027." />
     <title>Eliel & Anne — Nosso casamento</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="is-locked">
-    <a class="skip-link" href="#convite">Ir para o convite</a>
-
     <div class="intro" id="intro" aria-label="Abra o convite">
-      <div class="intro__grain" aria-hidden="true"></div>
-      <div class="intro__botanical intro__botanical--left" aria-hidden="true"></div>
-      <div class="intro__botanical intro__botanical--right" aria-hidden="true"></div>
-
+      <div class="leaf leaf--left" aria-hidden="true"></div>
+      <div class="leaf leaf--right" aria-hidden="true"></div>
       <p class="intro__eyebrow">Um convite especial para você</p>
 
-      <div class="envelope-scene">
-        <div class="photo-reveal photo-reveal--one" aria-hidden="true">
+      <div class="envelope-stage">
+        <figure class="intro-photo intro-photo--left" aria-hidden="true">
           <img src="assets/images/eliel-anne-01.jpg" alt="" />
-        </div>
-        <div class="photo-reveal photo-reveal--two" aria-hidden="true">
+        </figure>
+        <figure class="intro-photo intro-photo--right" aria-hidden="true">
           <img src="assets/images/eliel-anne-03.jpg" alt="" />
-        </div>
+        </figure>
 
         <div class="envelope" aria-hidden="true">
-          <div class="envelope__letter">
-            <span class="envelope__date">21 · 04 · 2027</span>
-            <strong>Eliel <em>&</em> Anne</strong>
-            <small>vão se casar</small>
+          <div class="letter">
+            <small>21 · 04 · 2027</small>
+            <strong>Eliel <i>&</i> Anne</strong>
+            <span>vão se casar</span>
           </div>
           <div class="envelope__back"></div>
-          <div class="envelope__pocket envelope__pocket--left"></div>
-          <div class="envelope__pocket envelope__pocket--right"></div>
-          <div class="envelope__pocket envelope__pocket--bottom"></div>
+          <div class="envelope__left"></div>
+          <div class="envelope__right"></div>
+          <div class="envelope__bottom"></div>
           <div class="envelope__flap"></div>
         </div>
 
@@ -53,239 +43,191 @@
         </button>
       </div>
 
-      <button class="intro__hint" id="openHint" type="button" aria-hidden="true" tabindex="-1">
+      <div class="intro__hint" aria-hidden="true">
         <span>Toque no selo para abrir</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="m7 10 5 5 5-5" />
-        </svg>
-      </button>
+        <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></svg>
+      </div>
     </div>
 
-    <button class="music-control" id="musicControl" type="button" aria-label="Ativar música" aria-pressed="false">
-      <svg class="music-control__on" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M9 18V5l11-2v13M9 9l11-2M6 21c1.7 0 3-1.1 3-2.5S7.7 16 6 16s-3 1.1-3 2.5S4.3 21 6 21Zm11-2c1.7 0 3-1.1 3-2.5S18.7 14 17 14s-3 1.1-3 2.5 1.3 2.5 3 2.5Z" />
-      </svg>
-      <svg class="music-control__off" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M9 18V5l11-2v10M9 9l11-2M6 21c1.7 0 3-1.1 3-2.5S7.7 16 6 16s-3 1.1-3 2.5S4.3 21 6 21ZM3 3l18 18" />
-      </svg>
-      <span class="music-control__label">Música</span>
-    </button>
+    <main class="book-app" id="bookApp" aria-hidden="true">
+      <div class="book-backdrop" aria-hidden="true"></div>
+      <div class="book-shell">
+        <div class="book" id="book" aria-label="Convite de casamento em formato de livro">
+          <article class="sheet cover-sheet" data-title="Capa">
+            <div class="page-face page-face--front cover-page">
+              <div class="cover-art">
+                <img src="assets/images/convite-capa.jpg" alt="Convite de casamento de Eliel Santos e Anne Daise, dia 21 de abril de 2027" width="941" height="1672" />
+              </div>
+              <div class="gesture-tip" id="gestureTip" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M15 6 9 12l6 6" /></svg>
+                <span>Arraste para folhear</span>
+                <svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" /></svg>
+              </div>
+            </div>
+            <div class="page-face page-face--back"><span>E <i>&</i> A</span></div>
+          </article>
 
-    <!-- Adicione um arquivo licenciado com este nome para ativar a faixa escolhida. -->
-    <audio id="backgroundMusic" loop preload="none" data-track="assets/audio/adele-romantic.mp3"></audio>
+          <article class="sheet" data-title="O nosso sim">
+            <div class="page-face page-face--front paper-page">
+              <div class="page-scroll story-page">
+                <header class="page-heading">
+                  <span class="eyebrow">O nosso sim</span>
+                  <h1>Deus transformou dois caminhos em uma só jornada.</h1>
+                </header>
+                <div class="media-frame media-frame--portrait" style="--photo: url('assets/images/eliel-anne-02.jpg')">
+                  <img src="assets/images/eliel-anne-02.jpg" alt="Eliel e Anne sorrindo juntos" width="960" height="1280" />
+                </div>
+                <p class="page-copy">Com a bênção de Deus e de seus pais, Eliel Santos e Anne Daise convidam você para celebrar o começo de uma vida inteira juntos.</p>
+                <p class="signature">Onde houver amor, ali estaremos.</p>
+              </div>
+            </div>
+            <div class="page-face page-face--back"><span>E <i>&</i> A</span></div>
+          </article>
 
-    <main id="convite" aria-hidden="true">
-      <section class="hero section" aria-labelledby="heroTitle">
-        <div class="hero__image" aria-hidden="true"></div>
-        <div class="hero__shade" aria-hidden="true"></div>
-        <div class="hero__content reveal">
-          <span class="eyebrow eyebrow--light">Convidamos você para o nosso casamento</span>
-          <h1 id="heroTitle">
-            <span>Eliel</span>
-            <em>&</em>
-            <span>Anne</span>
-          </h1>
-          <p>Uma nova história começa aqui.</p>
-          <div class="hero__date">21 · 04 · 2027</div>
-        </div>
-        <a class="scroll-cue" href="#historia" aria-label="Continuar para o convite">
-          <span>Descubra</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" /></svg>
-        </a>
-      </section>
+          <article class="sheet" data-title="Salve a data">
+            <div class="page-face page-face--front paper-page">
+              <div class="page-scroll date-page">
+                <header class="page-heading">
+                  <span class="eyebrow">Salve esta data</span>
+                  <h1><b>21</b> Abril <small>2027</small></h1>
+                  <p>Quarta-feira · às 16h30</p>
+                </header>
+                <div class="media-frame media-frame--landscape" style="--photo: url('assets/images/eliel-anne-03.jpg')">
+                  <img src="assets/images/eliel-anne-03.jpg" alt="Anne abraçada com Eliel em frente ao espelho" width="720" height="1280" />
+                </div>
+                <div class="countdown" aria-label="Contagem regressiva para o casamento">
+                  <div><strong id="countDays">000</strong><span>dias</span></div>
+                  <div><strong id="countHours">00</strong><span>horas</span></div>
+                  <div><strong id="countMinutes">00</strong><span>min</span></div>
+                  <div><strong id="countSeconds">00</strong><span>seg</span></div>
+                </div>
+                <button class="pill-button" type="button" data-demo="calendar">
+                  <svg viewBox="0 0 24 24"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z" /></svg>
+                  Salvar no calendário
+                </button>
+              </div>
+            </div>
+            <div class="page-face page-face--back"><span>E <i>&</i> A</span></div>
+          </article>
 
-      <section class="story section paper-section" id="historia" aria-labelledby="storyTitle">
-        <div class="botanical botanical--top" aria-hidden="true"></div>
-        <div class="section-shell">
-          <div class="story__copy reveal">
-            <span class="eyebrow">O nosso sim</span>
-            <h2 id="storyTitle">Deus transformou dois caminhos em uma só jornada.</h2>
-            <p>
-              Com a bênção de Deus e de seus pais, Eliel Santos e Anne Daise convidam você
-              para celebrar o começo de uma vida inteira juntos.
-            </p>
-          </div>
+          <article class="sheet" data-title="Cerimônia">
+            <div class="page-face page-face--front paper-page">
+              <div class="page-scroll details-page">
+                <header class="page-heading">
+                  <span class="eyebrow">Cerimônia & celebração</span>
+                  <h1>Esperamos você</h1>
+                  <p>Preparamos cada detalhe para viver este momento ao lado das pessoas que amamos.</p>
+                </header>
+                <section class="detail-card">
+                  <span class="detail-card__number">01</span>
+                  <svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  <h2>Fazenda Recanto das Oliveiras</h2>
+                  <p>Estrada das Palmeiras, 1200<br />Feira de Santana — BA</p>
+                  <button class="text-link" type="button" data-demo="map">Ver como chegar <span>→</span></button>
+                </section>
+                <section class="detail-card">
+                  <span class="detail-card__number">02</span>
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+                  <h2>Chegue com carinho</h2>
+                  <p>A cerimônia começa às 16h30. Sugerimos chegar com 30 minutos de antecedência.</p>
+                </section>
+              </div>
+            </div>
+            <div class="page-face page-face--back"><span>E <i>&</i> A</span></div>
+          </article>
 
-          <figure class="framed-photo framed-photo--story reveal">
-            <img
-              src="assets/images/eliel-anne-02.jpg"
-              alt="Eliel e Anne sorrindo juntos"
-              loading="lazy"
-              width="960"
-              height="1280"
-            />
-            <figcaption>Onde houver amor, ali estaremos.</figcaption>
-          </figure>
-        </div>
-      </section>
+          <article class="sheet" data-title="Para os convidados">
+            <div class="page-face page-face--front dark-page">
+              <div class="page-scroll actions-page">
+                <header class="page-heading">
+                  <span class="eyebrow eyebrow--light">Tudo em um só lugar</span>
+                  <h1>Para os nossos convidados</h1>
+                  <p>Toque nos cartões para encontrar cada informação.</p>
+                </header>
+                <div class="action-list">
+                  <button class="action-card" type="button" data-demo="rsvp">
+                    <span class="action-card__icon"><svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 1 1-3.2-6.4M16 3h5v5M14 10l7-7" /></svg></span>
+                    <span><strong>Confirmar presença</strong><small>Até 21 de março</small></span><i>→</i>
+                  </button>
+                  <button class="action-card" type="button" data-demo="gifts">
+                    <span class="action-card__icon"><svg viewBox="0 0 24 24"><path d="M3 10h18v11H3zM2 7h20v3H2zM12 7v14M12 7H7.5a2.5 2.5 0 1 1 2-4c1.5 1.1 2.5 4 2.5 4Zm0 0h4.5a2.5 2.5 0 1 0-2-4C13 4.1 12 7 12 7Z" /></svg></span>
+                    <span><strong>Lista de presentes</strong><small>Escolha com carinho</small></span><i>→</i>
+                  </button>
+                  <button class="action-card" type="button" data-dialog="dressCodeDialog">
+                    <span class="action-card__icon"><svg viewBox="0 0 24 24"><path d="m9 3 3 3 3-3 4 3-2 5v10H7V11L5 6l4-3Z" /></svg></span>
+                    <span><strong>Dress code</strong><small>Esporte fino rústico</small></span><i>→</i>
+                  </button>
+                  <button class="action-card" type="button" data-dialog="guideDialog">
+                    <span class="action-card__icon"><svg viewBox="0 0 24 24"><path d="M5 3h11a3 3 0 0 1 3 3v15H7a3 3 0 0 1-3-3V4a1 1 0 0 1 1-1Zm2 14h12M8 7h7M8 11h7" /></svg></span>
+                    <span><strong>Manual dos convidados</strong><small>Dicas para o grande dia</small></span><i>→</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="page-face page-face--back"><span>E <i>&</i> A</span></div>
+          </article>
 
-      <section class="save-date section" aria-labelledby="dateTitle">
-        <div class="save-date__photo" aria-hidden="true"></div>
-        <div class="save-date__overlay" aria-hidden="true"></div>
-        <div class="save-date__content reveal">
-          <span class="eyebrow eyebrow--light">Salve esta data</span>
-          <h2 id="dateTitle"><span>21</span> Abril <small>2027</small></h2>
-          <p>Quarta-feira · às 16h30</p>
-          <div class="countdown" aria-label="Contagem regressiva para o casamento">
-            <div><strong id="countDays">000</strong><span>dias</span></div>
-            <div><strong id="countHours">00</strong><span>horas</span></div>
-            <div><strong id="countMinutes">00</strong><span>min</span></div>
-            <div><strong id="countSeconds">00</strong><span>seg</span></div>
-          </div>
-          <button class="button button--light" type="button" data-demo="calendar">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z" />
-            </svg>
-            Salvar no calendário
-          </button>
-        </div>
-      </section>
+          <article class="sheet" data-title="Nossas memórias">
+            <div class="page-face page-face--front paper-page">
+              <div class="page-scroll gallery-page">
+                <header class="page-heading">
+                  <span class="eyebrow">Um pouco de nós</span>
+                  <h1>Memórias que nos trouxeram até aqui</h1>
+                </header>
+                <div class="memory-grid" aria-label="Fotos de Eliel e Anne">
+                  <figure><img src="assets/images/eliel-anne-01.jpg" alt="Eliel e Anne em frente ao espelho" width="960" height="1280" /><figcaption>nossos encontros</figcaption></figure>
+                  <figure><img src="assets/images/eliel-anne-02.jpg" alt="Eliel e Anne sorrindo juntos" width="960" height="1280" /><figcaption>nossa alegria</figcaption></figure>
+                  <figure><img src="assets/images/eliel-anne-03.jpg" alt="Anne abraçada com Eliel" width="720" height="1280" /><figcaption>nossa cumplicidade</figcaption></figure>
+                </div>
+              </div>
+            </div>
+            <div class="page-face page-face--back"><span>E <i>&</i> A</span></div>
+          </article>
 
-      <section class="details section paper-section" aria-labelledby="detailsTitle">
-        <div class="section-shell">
-          <div class="details__heading reveal">
-            <span class="eyebrow">Cerimônia & celebração</span>
-            <h2 id="detailsTitle">Esperamos você</h2>
-            <p>Preparamos cada detalhe para viver este momento ao lado das pessoas que amamos.</p>
-          </div>
+          <article class="sheet" data-title="Agradecimento">
+            <div class="page-face page-face--front paper-page">
+              <div class="page-scroll closing-page">
+                <span class="closing-monogram">E <i>&</i> A</span>
+                <div class="media-frame media-frame--closing" style="--photo: url('assets/images/eliel-anne-01.jpg')">
+                  <img src="assets/images/eliel-anne-01.jpg" alt="Eliel e Anne juntos em frente ao espelho" width="960" height="1280" />
+                </div>
+                <span class="eyebrow">Obrigado por fazer parte da nossa história</span>
+                <h1>Será uma alegria ter você conosco.</h1>
+                <p>Estamos preparando este dia com muito amor e não vemos a hora de celebrar ao lado de quem torna a nossa caminhada ainda mais especial.</p>
+                <strong>Com carinho, Eliel & Anne</strong>
+                <small>21 · 04 · 2027</small>
+              </div>
+            </div>
+            <div class="page-face page-face--back"><span>E <i>&</i> A</span></div>
+          </article>
 
-          <div class="details__card reveal">
-            <span class="details__number">01</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z" />
-              <circle cx="12" cy="9" r="2.5" />
-            </svg>
-            <h3>Fazenda Recanto das Oliveiras</h3>
-            <p>Estrada das Palmeiras, 1200<br />Feira de Santana — BA</p>
-            <button class="text-link" type="button" data-demo="map">Ver como chegar <span>→</span></button>
-          </div>
-
-          <div class="details__card reveal">
-            <span class="details__number">02</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M12 7v5l3 2" />
-            </svg>
-            <h3>Chegue com carinho</h3>
-            <p>A cerimônia terá início às 16h30. Sugerimos chegar com 30 minutos de antecedência.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="actions section" aria-labelledby="actionsTitle">
-        <div class="actions__texture" aria-hidden="true"></div>
-        <div class="section-shell">
-          <div class="actions__heading reveal">
-            <span class="eyebrow eyebrow--light">Tudo em um só lugar</span>
-            <h2 id="actionsTitle">Para os nossos convidados</h2>
-            <p>Toque nos cartões para encontrar cada informação.</p>
-          </div>
-
-          <div class="action-grid">
-            <button class="action-card reveal" type="button" data-demo="rsvp">
-              <span class="action-card__icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20 11.5a8 8 0 1 1-3.2-6.4M16 3h5v5M14 10l7-7" />
-                </svg>
-              </span>
-              <span><strong>Confirmar presença</strong><small>Até 21 de março</small></span>
-              <i>→</i>
+          <nav class="book-nav" aria-label="Navegação entre páginas">
+            <button id="prevPage" type="button" aria-label="Página anterior">
+              <svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7" /></svg>
             </button>
-
-            <button class="action-card reveal" type="button" data-demo="gifts">
-              <span class="action-card__icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M3 10h18v11H3zM2 7h20v3H2zM12 7v14M12 7H7.5a2.5 2.5 0 1 1 2-4c1.5 1.1 2.5 4 2.5 4Zm0 0h4.5a2.5 2.5 0 1 0-2-4C13 4.1 12 7 12 7Z" />
-                </svg>
-              </span>
-              <span><strong>Lista de presentes</strong><small>Escolha com carinho</small></span>
-              <i>→</i>
+            <div class="page-status" aria-live="polite">
+              <span id="pageTitle">Capa</span>
+              <strong><b id="currentPage">1</b> / <span id="totalPages">7</span></strong>
+            </div>
+            <button id="nextPage" type="button" aria-label="Próxima página">
+              <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></svg>
             </button>
-
-            <button class="action-card reveal" type="button" data-dialog="dressCodeDialog">
-              <span class="action-card__icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m9 3 3 3 3-3 4 3-2 5v10H7V11L5 6l4-3Z" />
-                </svg>
-              </span>
-              <span><strong>Dress code</strong><small>Esporte fino rústico</small></span>
-              <i>→</i>
-            </button>
-
-            <button class="action-card reveal" type="button" data-dialog="guideDialog">
-              <span class="action-card__icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 3h11a3 3 0 0 1 3 3v15H7a3 3 0 0 1-3-3V4a1 1 0 0 1 1-1Zm2 14h12M8 7h7M8 11h7" />
-                </svg>
-              </span>
-              <span><strong>Manual dos convidados</strong><small>Dicas para o grande dia</small></span>
-              <i>→</i>
-            </button>
-          </div>
+          </nav>
         </div>
-      </section>
-
-      <section class="gallery section paper-section" aria-labelledby="galleryTitle">
-        <div class="section-shell">
-          <div class="gallery__heading reveal">
-            <span class="eyebrow">Um pouco de nós</span>
-            <h2 id="galleryTitle">Memórias que nos trouxeram até aqui</h2>
-          </div>
-
-          <div class="photo-stack reveal" aria-label="Fotos de Eliel e Anne">
-            <figure class="polaroid polaroid--one">
-              <img src="assets/images/eliel-anne-01.jpg" alt="Eliel e Anne em frente ao espelho" loading="lazy" />
-              <figcaption>nossos encontros</figcaption>
-            </figure>
-            <figure class="polaroid polaroid--two">
-              <img src="assets/images/eliel-anne-03.jpg" alt="Anne abraçada com Eliel" loading="lazy" />
-              <figcaption>nossa cumplicidade</figcaption>
-            </figure>
-            <figure class="polaroid polaroid--three">
-              <img src="assets/images/eliel-anne-02.jpg" alt="Eliel e Anne sorrindo juntos" loading="lazy" />
-              <figcaption>o nosso amor</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="invitation-card-section section paper-section" aria-label="Convite ilustrado">
-        <figure class="invitation-card reveal">
-          <img
-            src="assets/images/convite-capa.jpg"
-            alt="Convite de casamento de Eliel Santos e Anne Daise, dia 21 de abril de 2027"
-            loading="lazy"
-            width="941"
-            height="1672"
-          />
-        </figure>
-      </section>
-
-      <section class="closing section" aria-labelledby="closingTitle">
-        <div class="closing__image" aria-hidden="true"></div>
-        <div class="closing__overlay" aria-hidden="true"></div>
-        <div class="closing__content reveal">
-          <span class="closing__monogram">E <i>&</i> A</span>
-          <span class="eyebrow eyebrow--light">Obrigado por fazer parte da nossa história</span>
-          <h2 id="closingTitle">Será uma alegria ter você conosco.</h2>
-          <p>
-            Estamos preparando este dia com muito amor e não vemos a hora de celebrar ao lado de
-            quem torna a nossa caminhada ainda mais especial.
-          </p>
-          <strong>Com carinho, Eliel & Anne</strong>
-          <span class="closing__date">21 · 04 · 2027</span>
-        </div>
-      </section>
+      </div>
     </main>
+
+    <button class="music-control" id="musicControl" type="button" aria-label="Ativar música" aria-pressed="false">
+      <svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13M9 9l11-2M6 21c1.7 0 3-1.1 3-2.5S7.7 16 6 16s-3 1.1-3 2.5S4.3 21 6 21Zm11-2c1.7 0 3-1.1 3-2.5S18.7 14 17 14s-3 1.1-3 2.5 1.3 2.5 3 2.5Z" /></svg>
+      <span>Música</span>
+    </button>
+    <audio id="backgroundMusic" loop preload="none" data-track="assets/audio/adele-romantic.mp3"></audio>
 
     <dialog class="info-dialog" id="dressCodeDialog">
       <button class="dialog-close" type="button" aria-label="Fechar">×</button>
       <span class="eyebrow">Dress code</span>
       <h2>Esporte fino rústico</h2>
-      <p>
-        Escolha roupas elegantes e confortáveis para um casamento ao ar livre. Tons terrosos,
-        naturais e suaves são muito bem-vindos.
-      </p>
+      <p>Escolha roupas elegantes e confortáveis para um casamento ao ar livre. Tons terrosos, naturais e suaves são muito bem-vindos.</p>
       <p><strong>Dica:</strong> prefira saltos grossos ou calçados confortáveis para o gramado.</p>
     </dialog>
 
@@ -305,16 +247,8 @@
       <button class="dialog-close" type="button" aria-label="Fechar">×</button>
       <span class="eyebrow">Trilha online</span>
       <h2>Adele Wedding Songs</h2>
-      <p>Toque em reproduzir no player do Spotify e continue navegando pelo convite.</p>
-      <iframe
-        title="Playlist Adele Wedding Songs no Spotify"
-        data-src="https://open.spotify.com/embed/playlist/6WZGDVyjLHG6olyzjkAyge?utm_source=generator&theme=0"
-        width="100%"
-        height="352"
-        frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-      ></iframe>
+      <p>Toque em reproduzir no player do Spotify e continue folheando o convite.</p>
+      <iframe title="Playlist Adele Wedding Songs no Spotify" data-src="https://open.spotify.com/embed/playlist/6WZGDVyjLHG6olyzjkAyge?utm_source=generator&theme=0" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </dialog>
 
     <div class="toast" id="demoToast" role="status" aria-live="polite">
