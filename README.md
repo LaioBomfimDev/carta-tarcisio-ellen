@@ -27,3 +27,14 @@ Adele no player oficial do Spotify. O Spotify exige que o próprio visitante toq
 
 O local, horário, dress code e links de confirmação/presentes são demonstrativos. Eles estão
 centralizados em `index.html` e `script.js` para facilitar a substituição.
+
+## Imagens
+
+Cada foto em `assets/images` tem uma versão `.webp` (mais leve) servida via `<picture>`, com o
+`.jpg` original como fallback. Ao trocar uma foto, gere também o `.webp` correspondente — por
+exemplo, com `python -c "from PIL import Image; Image.open('nova.jpg').save('nova.webp', quality=82)"`.
+
+Ao publicar o convite em um domínio definitivo, troque `og:image`/`twitter:image` em `index.html`
+para uma URL absoluta (ex.: `https://seudominio.com/assets/images/convite-capa.jpg`) e adicione uma
+tag `og:url` com o endereço final — isso garante que o link mostre uma prévia correta ao ser
+compartilhado no WhatsApp.

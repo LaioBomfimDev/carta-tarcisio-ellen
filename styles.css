@@ -382,7 +382,7 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .page-heading h1,
 .closing-page h1 {
   margin: 0;
-  font: 500 clamp(2rem, 9.5vw, 3.25rem)/.94 var(--serif);
+  font: 500 clamp(2rem, 9.5vw, 3.25rem)/1.08 var(--serif);
 }
 .page-heading > p { margin: .8rem auto 0; color: var(--soft-ink); font-size: .96rem; }
 
