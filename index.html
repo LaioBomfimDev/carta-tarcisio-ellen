@@ -38,9 +38,6 @@
 
         <div class="envelope" aria-hidden="true">
           <div class="letter">
-            <figure class="letter__photo">
-              <img src="assets/images/tarcisio-ellen-03.jpg" alt="" />
-            </figure>
             <small>21 · 04 · 2027</small>
             <strong>Tarcísio <i>&</i> Ellen</strong>
             <span>vão se casar</span>
@@ -52,8 +49,33 @@
           <div class="envelope__flap"></div>
         </div>
 
-        <button class="seal" id="openInvitation" type="button" aria-label="Abrir o convite">
-          <span>T</span><i>&</i><span>E</span>
+        <button class="seal" id="openInvitation" type="button" aria-label="Puxe o cordão para abrir o convite">
+          <svg class="seal__bow" viewBox="0 0 100 110" aria-hidden="true">
+            <defs>
+              <linearGradient id="ropeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#e8d5ac" />
+                <stop offset="50%" stop-color="#c9a876" />
+                <stop offset="100%" stop-color="#a1815a" />
+              </linearGradient>
+            </defs>
+            <g class="bow-loop bow-loop--left">
+              <path class="bow-rope" d="M50,40 C 36,22 16,20 9,32 C 3,43 16,54 50,40" />
+              <path class="bow-twist" d="M50,40 C 36,22 16,20 9,32 C 3,43 16,54 50,40" />
+            </g>
+            <g class="bow-loop bow-loop--right">
+              <path class="bow-rope" d="M50,40 C 64,22 84,20 91,32 C 97,43 84,54 50,40" />
+              <path class="bow-twist" d="M50,40 C 64,22 84,20 91,32 C 97,43 84,54 50,40" />
+            </g>
+            <g class="bow-tail bow-tail--left">
+              <path class="bow-rope" d="M50,40 C 42,52 34,64 30,84 C 28,92 27,98 29,104" />
+              <path class="bow-twist" d="M50,40 C 42,52 34,64 30,84 C 28,92 27,98 29,104" />
+            </g>
+            <g class="bow-tail bow-tail--right">
+              <path class="bow-rope" d="M50,40 C 58,52 66,64 70,84 C 72,92 73,98 71,104" />
+              <path class="bow-twist" d="M50,40 C 58,52 66,64 70,84 C 72,92 73,98 71,104" />
+            </g>
+            <ellipse class="bow-knot" cx="50" cy="40" rx="8" ry="6" />
+          </svg>
         </button>
       </div>
 
@@ -150,19 +172,38 @@
                   <h1>Esperamos você</h1>
                   <p>Preparamos cada detalhe para viver este momento ao lado das pessoas que amamos.</p>
                 </header>
-                <section class="detail-card">
-                  <span class="detail-card__number">01</span>
-                  <svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z" /><circle cx="12" cy="9" r="2.5" /></svg>
-                  <h2>Fazenda Recanto das Oliveiras</h2>
-                  <p>Estrada das Palmeiras, 1200<br />Feira de Santana — BA</p>
-                  <button class="text-link" type="button" data-demo="map">Ver como chegar <span>→</span></button>
-                </section>
-                <section class="detail-card">
-                  <span class="detail-card__number">02</span>
-                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                  <h2>Chegue com carinho</h2>
-                  <p>A cerimônia começa às 16h30. Sugerimos chegar com 30 minutos de antecedência.</p>
-                </section>
+                <div class="ceremony-summary" aria-label="21 de abril de 2027, às 16h30">
+                  <div class="ceremony-summary__date">
+                    <strong>21</strong>
+                    <span><b>Abril</b><small>2027</small></span>
+                  </div>
+                  <i aria-hidden="true"></i>
+                  <div class="ceremony-summary__time">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+                    <span><strong>16h30</strong><small>quarta-feira</small></span>
+                  </div>
+                </div>
+                <div class="detail-list">
+                  <section class="detail-card">
+                    <span class="detail-card__number">01</span>
+                    <span class="detail-card__icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z" /><circle cx="12" cy="9" r="2.5" /></svg></span>
+                    <div class="detail-card__body">
+                      <span class="detail-card__kicker">O lugar</span>
+                      <h2>Fazenda Recanto das Oliveiras</h2>
+                      <p>Estrada das Palmeiras, 1200<br />Feira de Santana — BA</p>
+                      <button class="text-link" type="button" data-demo="map">Ver como chegar <span>→</span></button>
+                    </div>
+                  </section>
+                  <section class="detail-card">
+                    <span class="detail-card__number">02</span>
+                    <span class="detail-card__icon"><svg viewBox="0 0 24 24"><path d="m6 12 4 4 8-9" /></svg></span>
+                    <div class="detail-card__body">
+                      <span class="detail-card__kicker">Antes do sim</span>
+                      <h2>Chegue com carinho</h2>
+                      <p>Sugerimos chegar às 16h para se acomodar com tranquilidade antes da cerimônia.</p>
+                    </div>
+                  </section>
+                </div>
               </div>
             </div>
             <div class="page-face page-face--back"><span>T <i>&</i> E</span></div>
