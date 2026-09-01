@@ -196,6 +196,38 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   transition: transform .8s cubic-bezier(.4,0,.2,1), z-index 0s .4s;
 }
 
+.cord {
+  position: absolute;
+  z-index: 7;
+  left: 0;
+  right: 0;
+  bottom: 24%;
+  display: flex;
+  height: .55rem;
+  transform: translateY(50%);
+  pointer-events: none;
+  filter: drop-shadow(0 3px 5px rgba(20,10,5,.4));
+}
+
+.cord__strand {
+  position: relative;
+  flex: 1;
+  border-radius: 999px;
+  background: linear-gradient(180deg,#e8d5ac,#c9a876 45%,#a1815a);
+  transition: transform .5s ease .1s, opacity .4s ease .1s;
+}
+
+.cord__strand::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: repeating-linear-gradient(115deg, rgba(122,92,56,.5) 0 2px, transparent 2px 7px);
+}
+
+.intro.is-opening .cord__strand--left { transform: translateX(-45%); opacity: 0; }
+.intro.is-opening .cord__strand--right { transform: translateX(45%); opacity: 0; }
+
 .seal {
   position: absolute;
   z-index: 8;
