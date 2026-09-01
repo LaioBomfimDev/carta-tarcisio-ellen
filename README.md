@@ -3,8 +3,8 @@
 Convite interativo, mobile-first, feito em HTML, CSS e JavaScript puro.
 
 O conteúdo funciona como um livro de sete folhas. No celular, o convidado pode arrastar para os
-lados, tocar nas bordas ou usar as setas inferiores. As fotos são exibidas com a proporção original,
-usando a própria imagem desfocada para preencher molduras sem cortes agressivos.
+lados, tocar nas bordas ou usar as setas inferiores. As fotos são exibidas em molduras que seguem
+a proporção original, sem cortes e sem preenchimentos artificiais nas laterais.
 
 ## Visualizar
 
