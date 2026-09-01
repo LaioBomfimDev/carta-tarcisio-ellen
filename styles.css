@@ -470,27 +470,24 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .gesture-tip {
   position: absolute;
   z-index: 5;
-  left: 50%;
-  bottom: max(4.4rem, calc(3.7rem + env(safe-area-inset-bottom)));
-  display: flex;
-  align-items: center;
-  gap: .55rem;
-  padding: .55rem .75rem;
-  color: #fff;
-  background: rgba(48,32,23,.78);
-  border: 1px solid rgba(255,255,255,.16);
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.22);
-  backdrop-filter: blur(8px);
-  font: 500 .52rem/1 var(--sans);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  transform: translateX(-50%);
+  top: 52%;
+  left: 68%;
+  width: 2.3rem;
+  height: 2.3rem;
+  color: rgba(255,250,241,.8);
+  transform: translate(-50%,-50%);
   transition: opacity .35s ease;
-  white-space: nowrap;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.4));
+  pointer-events: none;
 }
 .gesture-tip.is-hidden { opacity: 0; }
-.gesture-tip svg { width: .9rem; stroke-width: 1.7; }
+.gesture-tip svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 1.6;
+  opacity: 0;
+  animation: gestureDrag 2.6s ease-in-out infinite;
+}
 
 .media-frame {
   position: relative;
@@ -688,6 +685,13 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   50% { transform: translate(-50%,63.6%) rotate(-1deg); }
 }
 @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(.3rem); } }
+@keyframes gestureDrag {
+  0% { transform: translateX(16px) scale(.9); opacity: 0; }
+  22% { transform: translateX(16px) scale(1); opacity: .85; }
+  62% { transform: translateX(-20px) scale(1); opacity: .85; }
+  85% { transform: translateX(-20px) scale(.95); opacity: 0; }
+  100% { transform: translateX(16px) scale(.9); opacity: 0; }
+}
 
 @media (min-width: 700px) {
   .book-shell { width: min(440px,42vw); height: min(820px,94dvh); }
@@ -728,7 +732,6 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   .page-heading h1,.closing-page h1 { font-size: 1.75rem; }
   .action-card { gap: .55rem; padding-inline: .55rem; }
   .action-card strong { font-size: .94rem; }
-  .gesture-tip { font-size: .46rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
