@@ -13,6 +13,9 @@ const musicControl = document.querySelector("#musicControl");
 const music = document.querySelector("#backgroundMusic");
 const musicDialog = document.querySelector("#musicDialog");
 const toast = document.querySelector("#demoToast");
+const lightbox = document.querySelector("#lightbox");
+const lightboxImg = document.querySelector("#lightboxImg");
+const lightboxClose = document.querySelector("#lightboxClose");
 
 let currentPage = 0;
 let invitationOpened = false;
@@ -110,12 +113,12 @@ previousButton.addEventListener("click", previousPage);
 nextButton.addEventListener("click", nextPage);
 
 book.addEventListener("pointerdown", (event) => {
-  if (event.target.closest("button, a, iframe, dialog")) return;
+  if (event.target.closest("button, a, iframe, dialog, .lightbox-trigger")) return;
   pointerStart = { x: event.clientX, y: event.clientY, time: performance.now() };
 });
 
 book.addEventListener("pointerup", (event) => {
-  if (!pointerStart || event.target.closest("button, a, iframe, dialog")) {
+  if (!pointerStart || event.target.closest("button, a, iframe, dialog, .lightbox-trigger")) {
     pointerStart = null;
     return;
   }
@@ -255,6 +258,47 @@ document.querySelectorAll("[data-demo]").forEach((button) => {
     const [title, message] = demoMessages[button.dataset.demo];
     showToast(title, message);
   });
+});
+
+let lightboxCloseTimer;
+
+const openLightbox = (img) => {
+  window.clearTimeout(lightboxCloseTimer);
+  lightboxImg.src = img.currentSrc || img.src;
+  lightboxImg.alt = img.alt || "";
+  lightbox.classList.remove("is-visible");
+  lightbox.classList.add("is-open");
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => lightbox.classList.add("is-visible"));
+  });
+};
+
+const closeLightbox = () => {
+  lightbox.classList.remove("is-visible");
+  window.clearTimeout(lightboxCloseTimer);
+  lightboxCloseTimer = window.setTimeout(() => lightbox.classList.remove("is-open"), 320);
+};
+
+document.querySelectorAll(".lightbox-trigger").forEach((img) => {
+  img.setAttribute("role", "button");
+  img.setAttribute("tabindex", "0");
+  img.setAttribute("aria-label", "Ampliar foto: " + (img.alt || ""));
+  img.addEventListener("click", () => openLightbox(img));
+  img.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openLightbox(img);
+    }
+  });
+});
+
+lightboxClose.addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
 });
 
 arrangeSheets();

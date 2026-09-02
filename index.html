@@ -97,7 +97,7 @@
           <article class="sheet cover-sheet" data-title="Capa">
             <div class="page-face page-face--front cover-page">
               <div class="cover-art">
-                <img src="assets/images/tarcisio-ellen-01.jpg" alt="Tarcísio e Ellen juntos na igreja" width="1023" height="1537" />
+                <img class="lightbox-trigger" src="assets/images/tarcisio-ellen-01.jpg" alt="Tarcísio e Ellen juntos na igreja" width="1023" height="1537" />
                 <div class="cover-art__shade" aria-hidden="true"></div>
                 <div class="cover-art__copy">
                   <span>Convite de casamento</span>
@@ -120,7 +120,7 @@
                   <h1>Deus transformou dois caminhos em uma só jornada.</h1>
                 </header>
                 <div class="media-frame media-frame--portrait">
-                  <img src="assets/images/tarcisio-ellen-03.jpg" alt="Ellen e Tarcísio durante a cerimônia civil" width="719" height="1280" loading="lazy" decoding="async" />
+                  <img class="lightbox-trigger" src="assets/images/tarcisio-ellen-03.jpg" alt="Ellen e Tarcísio durante a cerimônia civil" width="719" height="1280" loading="lazy" decoding="async" />
                 </div>
                 <p class="page-copy">Com a bênção de Deus e de seus pais, Tarcísio Costa de Brito Bahia e Ellen Pinto Santana convidam você para celebrar o começo de uma vida inteira juntos.</p>
                 <div class="parents-grid" aria-label="Pais dos noivos">
@@ -151,7 +151,7 @@
                 </header>
                 <div class="date-divider" aria-hidden="true"><span></span><i>✦</i><span></span></div>
                 <div class="media-frame media-frame--landscape">
-                  <img src="assets/images/tarcisio-ellen-02.jpg" alt="Tarcísio e Ellen abraçados" width="1200" height="1600" loading="lazy" decoding="async" />
+                  <img class="lightbox-trigger" src="assets/images/tarcisio-ellen-02.jpg" alt="Tarcísio e Ellen abraçados" width="1200" height="1600" loading="lazy" decoding="async" />
                 </div>
                 <div class="countdown" aria-label="Contagem regressiva para o casamento">
                   <div><strong id="countDays">000</strong><span>dias</span></div>
@@ -256,11 +256,11 @@
                   <h1>Memórias que nos trouxeram até aqui</h1>
                 </header>
                 <div class="memory-grid" aria-label="Fotos de Tarcísio e Ellen">
-                  <figure><img src="assets/images/tarcisio-ellen-01.jpg" alt="Tarcísio e Ellen na igreja" width="1023" height="1537" loading="lazy" decoding="async" /><figcaption>nossa bênção</figcaption></figure>
-                  <figure><img src="assets/images/tarcisio-ellen-02.jpg" alt="Tarcísio e Ellen abraçados" width="1200" height="1600" loading="lazy" decoding="async" /><figcaption>nossa alegria</figcaption></figure>
-                  <figure><img src="assets/images/tarcisio-ellen-03.jpg" alt="Tarcísio beijando a mão de Ellen" width="719" height="1280" loading="lazy" decoding="async" /><figcaption>nosso carinho</figcaption></figure>
-                  <figure><img src="assets/images/tarcisio-ellen-04.jpg" alt="Ellen e Tarcísio assinando o casamento civil" width="1200" height="1600" loading="lazy" decoding="async" /><figcaption>o nosso sim</figcaption></figure>
-                  <figure class="memory-grid__featured"><img src="assets/images/tarcisio-ellen-05.jpg" alt="Tarcísio e Ellen exibindo as alianças" width="738" height="1600" loading="lazy" decoding="async" /><figcaption>para sempre nós</figcaption></figure>
+                  <figure><img class="lightbox-trigger" src="assets/images/tarcisio-ellen-01.jpg" alt="Tarcísio e Ellen na igreja" width="1023" height="1537" loading="lazy" decoding="async" /><figcaption>nossa bênção</figcaption></figure>
+                  <figure><img class="lightbox-trigger" src="assets/images/tarcisio-ellen-02.jpg" alt="Tarcísio e Ellen abraçados" width="1200" height="1600" loading="lazy" decoding="async" /><figcaption>nossa alegria</figcaption></figure>
+                  <figure><img class="lightbox-trigger" src="assets/images/tarcisio-ellen-03.jpg" alt="Tarcísio beijando a mão de Ellen" width="719" height="1280" loading="lazy" decoding="async" /><figcaption>nosso carinho</figcaption></figure>
+                  <figure><img class="lightbox-trigger" src="assets/images/tarcisio-ellen-04.jpg" alt="Ellen e Tarcísio assinando o casamento civil" width="1200" height="1600" loading="lazy" decoding="async" /><figcaption>o nosso sim</figcaption></figure>
+                  <figure class="memory-grid__featured"><img class="lightbox-trigger" src="assets/images/tarcisio-ellen-05.jpg" alt="Tarcísio e Ellen exibindo as alianças" width="738" height="1600" loading="lazy" decoding="async" /><figcaption>para sempre nós</figcaption></figure>
                 </div>
               </div>
             </div>
@@ -272,7 +272,7 @@
               <div class="page-scroll closing-page">
                 <span class="closing-monogram">T <i>&</i> E</span>
                 <div class="media-frame media-frame--closing">
-                  <img src="assets/images/tarcisio-ellen-05.jpg" alt="Tarcísio e Ellen exibindo as alianças" width="738" height="1600" loading="lazy" decoding="async" />
+                  <img class="lightbox-trigger" src="assets/images/tarcisio-ellen-05.jpg" alt="Tarcísio e Ellen exibindo as alianças" width="738" height="1600" loading="lazy" decoding="async" />
                 </div>
                 <span class="eyebrow">Obrigado por fazer parte da nossa história</span>
                 <h1>Será uma alegria ter você conosco.</h1>
@@ -337,6 +337,13 @@
     <div class="toast" id="demoToast" role="status" aria-live="polite">
       <strong>Link demonstrativo</strong>
       <span>Substituiremos pelo endereço verdadeiro depois.</span>
+    </div>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+      <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Fechar">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+      </button>
+      <img class="lightbox__img" id="lightboxImg" src="" alt="" />
     </div>
 
     <script src="script.js"></script>
