@@ -653,22 +653,22 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   bottom: max(4.25rem, calc(3.7rem + env(safe-area-inset-bottom)));
   display: flex;
   align-items: center;
-  gap: .42rem;
-  min-height: 2.35rem;
-  padding: .55rem .85rem;
-  color: #fffaf1;
-  background: rgba(61,43,32,.92);
-  border: 1px solid rgba(255,255,255,.22);
+  gap: .35rem;
+  min-height: 1.8rem;
+  padding: .38rem .65rem;
+  color: rgba(255,250,241,.78);
+  background: rgba(61,43,32,.42);
+  border: 1px solid rgba(255,255,255,.12);
   border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(39,25,17,.28);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(39,25,17,.14);
+  backdrop-filter: blur(6px);
   pointer-events: none;
-  animation: scrollCueFloat 1.45s ease-in-out infinite;
+  animation: scrollCueFloat 2.4s ease-in-out infinite;
 }
 .page-scroll-cue[hidden] { display: none; }
-.page-scroll-cue.is-on-dark { color: #3d2b20; background: rgba(244,230,207,.94); border-color: rgba(61,43,32,.18); }
-.page-scroll-cue span { font: 600 .66rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
-.page-scroll-cue svg { width: 1.05rem; height: 1.05rem; stroke-width: 1.8; }
+.page-scroll-cue.is-on-dark { color: rgba(61,43,32,.75); background: rgba(244,230,207,.55); border-color: rgba(61,43,32,.1); }
+.page-scroll-cue span { font: 600 .58rem/1 var(--sans); letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; }
+.page-scroll-cue svg { width: .92rem; height: .92rem; stroke-width: 1.6; }
 
 .book-nav {
   position: absolute;
@@ -689,14 +689,14 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   pointer-events: none;
 }
 
-.book-nav button { display: grid; place-items: center; width: 2.95rem; height: 2.95rem; padding: 0; color: #f2ddba; background: rgba(255,255,255,.14); border: 1px solid rgba(242,221,186,.4); border-radius: 50%; box-shadow: 0 4px 14px rgba(0,0,0,.22); cursor: pointer; pointer-events: auto; transition: background .2s, border-color .2s, transform .2s; }
-.book-nav button:active { transform: scale(.92); background: rgba(255,255,255,.22); }
-.book-nav button:disabled { opacity: .22; cursor: default; }
+.book-nav button { display: grid; place-items: center; width: 3rem; height: 3rem; padding: 0; color: #3d2b20; background: linear-gradient(155deg, #ecd6a4, #c5a56c); border: 1px solid rgba(255,255,255,.5); border-radius: 50%; box-shadow: 0 6px 16px rgba(20,12,6,.35), inset 0 1px 0 rgba(255,255,255,.45); cursor: pointer; pointer-events: auto; transition: transform .2s, box-shadow .2s, background .2s; }
+.book-nav button:active { transform: scale(.9); box-shadow: 0 3px 8px rgba(20,12,6,.3), inset 0 1px 0 rgba(255,255,255,.45); }
+.book-nav button:disabled { color: #f2ddba; background: rgba(255,255,255,.12); border-color: rgba(242,221,186,.3); box-shadow: none; opacity: .35; cursor: default; }
 .book-nav button:last-child { justify-self: end; }
-.book-nav svg { width: 1.4rem; stroke-width: 1.9; }
+.book-nav svg { width: 1.35rem; stroke-width: 2.1; }
 
 @media (hover: hover) {
-  .book-nav button:not(:disabled):hover { background: rgba(255,255,255,.22); border-color: rgba(242,221,186,.6); }
+  .book-nav button:not(:disabled):hover { background: linear-gradient(155deg, #f2e0b3, #d3b27c); box-shadow: 0 8px 18px rgba(20,12,6,.4), inset 0 1px 0 rgba(255,255,255,.5); }
 }
 .page-status { display: flex; flex-direction: column; align-items: center; min-width: 0; }
 .page-status > span { max-width: 100%; overflow: hidden; color: rgba(255,255,255,.72); font: 500 .6rem/1.2 var(--sans); letter-spacing: .09em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
@@ -795,8 +795,8 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   100% { transform: translateX(16px) scale(.9); opacity: 0; }
 }
 @keyframes scrollCueFloat {
-  0%,100% { transform: translate(-50%,0); }
-  50% { transform: translate(-50%,.34rem); }
+  0%,100% { transform: translate(-50%,0); opacity: .7; }
+  50% { transform: translate(-50%,.18rem); opacity: 1; }
 }
 
 @media (min-width: 700px) {
