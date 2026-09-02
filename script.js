@@ -237,9 +237,9 @@ document.querySelectorAll(".info-dialog").forEach((dialog) => {
 
 const demoMessages = {
   calendar: ["Calendário demonstrativo", "O evento será conectado ao calendário definitivo depois."],
-  map: ["Local fictício", "Substituiremos pelo endereço real da cerimônia."],
-  rsvp: ["Confirmação demonstrativa", "Aqui entra o WhatsApp ou formulário de presença."],
-  gifts: ["Lista demonstrativa", "Aqui entra o link da lista de presentes escolhida pelo casal."],
+  map: ["Endereço da cerimônia", "Aqui entra o endereço e o link do mapa que vocês nos enviarem."],
+  rsvp: ["Confirmação de presença", "Aqui entra o link de WhatsApp ou formulário que vocês escolherem."],
+  gifts: ["Lista de presentes", "Aqui entra o link da lista que vocês montarem."],
 };
 
 const showToast = (title, message) => {
