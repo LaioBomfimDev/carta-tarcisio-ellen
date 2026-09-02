@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Briefing do Convite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Allura&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#FBF6EE; --paper-deep:#F1E8D8; --card:#FFFDF8;
+    --ink:#2A2118; --ink-soft:#6B5D4C; --ink-faint:#9C8B76;
+    --accent:#A8455B; --accent-ink:#FCEEF0; --accent-soft:#E7C9CE;
+    --line:rgba(42,33,24,.14); --success:#4F7A5B; --danger:#B4433A;
+    --mock-wood:#2f1e15; --mock-paper:#f3eadb; --mock-paper-light:#fffaf1;
+    --mock-ink:#3d2b20; --mock-soft:#705b4c; --mock-rust:#9a5a40; --mock-gold:#c5a56c;
+    --display:"Fraunces",Georgia,serif; --body:"Libre Franklin",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --serif:"Cormorant Garamond",Georgia,serif; --script:"Allura","Segoe Script",cursive;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1B1712; --paper-deep:#211C16; --card:#241F19;
+      --ink:#F3EADD; --ink-soft:#C9BBA6; --ink-faint:#8B7E6C;
+      --accent:#E08A9B; --accent-ink:#2A1418; --accent-soft:#4A2A30;
+      --line:rgba(243,234,221,.14); --success:#7FB58C; --danger:#E08A7F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1B1712; --paper-deep:#211C16; --card:#241F19;
+    --ink:#F3EADD; --ink-soft:#C9BBA6; --ink-faint:#8B7E6C;
+    --accent:#E08A9B; --accent-ink:#2A1418; --accent-soft:#4A2A30;
+    --line:rgba(243,234,221,.14); --success:#7FB58C; --danger:#E08A7F;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{background:var(--paper);}
+  body{
+    margin:0; color:var(--ink);
+    font-family:var(--body); line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--display); font-weight:600; text-wrap:balance; margin:0;}
+  p{margin:0;}
+  button{font:inherit;}
+  input,textarea{font-family:inherit;}
+
+  .app{max-width:920px; margin:0 auto; padding:0 1.1rem 6rem; overflow-x:hidden;}
+
+  /* ---------- Header / progress (mobile-first) ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:20; background:var(--paper);
+    padding:.7rem 0 .55rem; border-bottom:1px solid var(--line);
+  }
+  .topbar__row{display:flex; align-items:center; justify-content:space-between; gap:.6rem; max-width:920px; margin:0 auto; padding:0 1rem;}
+  .topbar__brand b{font-family:var(--display); font-size:1rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .topbar__step{display:none;}
+  .progress{height:3px; background:var(--line); margin-top:.55rem; border-radius:2px; overflow:hidden;}
+  .progress > i{display:block; height:100%; background:var(--accent); transition:width .4s cubic-bezier(.4,0,.2,1); border-radius:2px;}
+
+  @media (min-width:641px){
+    .topbar{padding:.9rem 0 .7rem;}
+    .topbar__row{padding:0 1.1rem;}
+    .topbar__brand b{font-size:1.12rem;}
+    .topbar__step{display:inline; font-family:var(--mono); font-size:.79rem; color:var(--ink-soft); white-space:nowrap; font-variant-numeric:tabular-nums;}
+    .progress{margin-top:.65rem;}
+  }
+
+  /* ---------- Welcome / done ---------- */
+  .welcome{padding:1.8rem 0 1.6rem; display:flex; flex-direction:column; align-items:flex-start; gap:1.15rem;}
+  .welcome__eyebrow{font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600;}
+  .welcome h1{font-size:clamp(1.9rem,8vw,3rem); line-height:1.08;}
+  .welcome p.lead{max-width:52ch; color:var(--ink-soft); font-size:1.06rem;}
+  .welcome__list{display:grid; gap:.6rem; margin-top:.3rem;}
+  .welcome__list div{display:flex; gap:.65rem; align-items:flex-start; font-size:.96rem; color:var(--ink-soft);}
+  .welcome__list b{color:var(--ink); font-family:var(--display); font-weight:600; flex:none; width:1.4rem;}
+  @media (min-width:641px){
+    .welcome{padding:3.2rem 0 2rem; gap:1.4rem;}
+    .welcome p.lead{font-size:1.1rem;}
+    .welcome__list{gap:.65rem;}
+    .welcome__list div{font-size:.98rem;}
+  }
+
+  /* ---------- Step layout (mobile-first) ---------- */
+  .step{padding-top:1.1rem; display:grid; gap:.9rem; grid-template-columns:1fr; align-items:start;}
+  @media (min-width:641px){ .step{padding-top:1.9rem; gap:1.6rem; grid-template-columns:220px 1fr;} }
+
+  .mock-col{display:flex; flex-direction:column; align-items:center; gap:.45rem; margin:0 auto;}
+  @media (min-width:641px){ .mock-col{position:sticky; top:5.2rem; margin:0;} }
+  .mock-tag{font-family:var(--mono); font-size:.62rem; letter-spacing:.06em; color:var(--ink-faint); text-transform:uppercase;}
+
+  .mock-phone{
+    width:130px; height:267px; border-radius:14px; background:var(--mock-wood);
+    box-shadow:0 10px 22px rgba(0,0,0,.28), inset 0 0 0 4px rgba(0,0,0,.35);
+    overflow:hidden; position:relative; flex:none;
+  }
+  @media (min-width:641px){
+    .mock-phone{width:168px; height:344px; border-radius:16px; box-shadow:0 14px 30px rgba(0,0,0,.28), inset 0 0 0 5px rgba(0,0,0,.35);}
+  }
+  .mock-screen{position:absolute; inset:5px; border-radius:11px; overflow:hidden; background:var(--mock-paper);
+    font-family:var(--serif); color:var(--mock-ink); display:flex; flex-direction:column;}
+  .mock-screen.dark{background:linear-gradient(150deg,#4a3123,#2c1c15 75%); color:#fdf6e9;}
+  .mock-eyebrow{font-family:var(--body); font-size:.35rem; letter-spacing:.1em; text-transform:uppercase; color:var(--mock-rust); font-weight:600;}
+  .mock-screen.dark .mock-eyebrow{color:#e2cba3;}
+  .mock-h{font-family:var(--serif); font-weight:500; line-height:1; margin-top:.18rem;}
+  .mock-script{font-family:var(--script); line-height:1;}
+  .mock-photo{background:linear-gradient(135deg,#dcd0ba,#c9b998); border:2px solid var(--mock-paper-light); box-shadow:0 3px 8px rgba(0,0,0,.18); overflow:hidden; display:flex; align-items:center; justify-content:center;}
+  .mock-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .mock-photo svg{width:38%; opacity:.35;}
+
+  .field-col{min-width:0;}
+  .step-kicker{font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:.3rem;}
+  .step h2{font-size:1.7rem; margin-bottom:.4rem;}
+  .step-hint{color:var(--ink-soft); font-size:1rem; max-width:58ch; margin-bottom:1.4rem;}
+
+  .field{margin-bottom:1.15rem;}
+  .field label{display:block; font-size:.95rem; font-weight:600; margin-bottom:.4rem;}
+  .field .sub{display:block; font-weight:400; color:var(--ink-faint); font-size:.84rem; margin-top:.15rem;}
+  .field-help{margin:-.15rem 0 .5rem; font-size:.85rem; color:var(--ink-faint); line-height:1.5;}
+  .field input[type=text], .field input[type=url], .field input[type=date], .field input[type=time], .field textarea{
+    width:100%; padding:.6rem .75rem; border:1px solid var(--line); border-radius:9px;
+    background:var(--card); color:var(--ink); font-size:1rem; resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .field textarea{min-height:4.2rem; line-height:1.45;}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:.8rem;}
+  @media (max-width:480px){ .two-col{grid-template-columns:1fr;} }
+
+  .fixed-info{
+    margin:0 0 1.25rem; padding:.9rem 1rem; border:1px solid var(--line); border-radius:12px;
+    background:linear-gradient(145deg,var(--card),var(--paper-deep));
+  }
+  .fixed-info__label{display:block; margin-bottom:.55rem; color:var(--accent); font-size:.75rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase;}
+  .fixed-info__grid{display:grid; gap:.65rem; grid-template-columns:1fr 1fr;}
+  .fixed-info__item{min-width:0;}
+  .fixed-info__item small{display:block; margin-bottom:.12rem; color:var(--ink-faint); font-size:.78rem;}
+  .fixed-info__item strong{display:block; color:var(--ink); font-family:var(--display); font-size:1rem; font-weight:600; line-height:1.3;}
+  @media (max-width:480px){ .fixed-info__grid{grid-template-columns:1fr;} }
+
+  .radio-row{display:flex; flex-wrap:wrap; gap:.5rem;}
+  .radio-chip{position:relative;}
+  .radio-chip input{position:absolute; opacity:0; inset:0; cursor:pointer;}
+  .radio-chip span{display:block; padding:.6rem .95rem; border:1px solid var(--line); border-radius:999px; font-size:.92rem; color:var(--ink-soft); background:var(--card); transition:.15s;}
+  .radio-chip input:checked + span{background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:600;}
+  .radio-chip input:focus-visible + span{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .photo-field{display:flex; align-items:center; gap:.8rem; min-width:0;}
+  .photo-btn{display:inline-flex; align-items:center; gap:.4rem; padding:.58rem .95rem; border-radius:999px; border:1px dashed var(--ink-faint); background:transparent; color:var(--ink-soft); font-size:.9rem; cursor:pointer; flex:none;}
+  .photo-btn:hover{border-color:var(--accent); color:var(--accent);}
+  .photo-thumb{width:2.6rem; height:2.6rem; border-radius:8px; overflow:hidden; background:var(--paper-deep); flex:none; display:flex; align-items:center; justify-content:center; font-size:.65rem; color:var(--ink-faint);}
+  .photo-thumb img{width:100%; height:100%; object-fit:cover;}
+  .photo-name{flex:1 1 auto; min-width:0; font-size:.85rem; color:var(--ink-soft); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+  .mock-general{padding:.72rem .58rem; text-align:center; background:radial-gradient(circle at 50% 16%,#fffdf7 0,#f3e9d8 60%,#e5d5bd 100%);}
+  .mock-general__frame{position:relative; flex:1; border:1px solid rgba(154,90,64,.35); padding:.5rem .32rem; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .mock-general__frame:before,.mock-general__frame:after{content:""; position:absolute; width:1.05rem; height:1.05rem; border-color:var(--mock-rust); opacity:.6;}
+  .mock-general__frame:before{left:.16rem; top:.16rem; border-left:1px solid; border-top:1px solid;}
+  .mock-general__frame:after{right:.16rem; bottom:.16rem; border-right:1px solid; border-bottom:1px solid;}
+  .mock-general__names{margin:.3rem 0 .18rem; color:var(--mock-rust); font-family:var(--script); font-size:.92rem; line-height:.9;}
+  .mock-general__rule{width:1.8rem; height:1px; margin:.22rem auto; background:var(--mock-gold);}
+  .mock-general__details{font-family:var(--body); color:var(--mock-soft); font-size:.27rem; line-height:1.55;}
+
+  .mock-envelope{align-items:center; justify-content:center; padding:.75rem .48rem; text-align:center; background:radial-gradient(circle at 50% 25%,#59402f 0,#2f2018 64%,#21150f 100%); color:#fff8ea;}
+  .mock-envelope__stage{position:relative; width:84%; height:43%; margin-top:.7rem; filter:drop-shadow(0 .38rem .42rem rgba(0,0,0,.28));}
+  .mock-envelope__body{position:absolute; inset:0; overflow:hidden; border:1px solid rgba(255,255,255,.15); border-radius:2px; background:linear-gradient(145deg,#d9bd91,#b68d5e);}
+  .mock-envelope__body:before,.mock-envelope__body:after{content:""; position:absolute; top:0; width:72%; height:100%; background:#c9a578;}
+  .mock-envelope__body:before{left:0; clip-path:polygon(0 0,100% 50%,0 100%);}
+  .mock-envelope__body:after{right:0; clip-path:polygon(100% 0,0 50%,100% 100%); background:#bb9468;}
+  .mock-envelope__bottom{position:absolute; inset:auto 0 0; height:70%; background:linear-gradient(155deg,#d7b585,#b88c5e); clip-path:polygon(0 100%,50% 18%,100% 100%);}
+  .mock-envelope__flap{position:absolute; z-index:2; left:0; right:0; top:0; height:70%; background:linear-gradient(155deg,#ead2ad,#c39b6d); clip-path:polygon(0 0,100% 0,50% 86%); transform-origin:top;}
+  .mock-envelope__cord{position:absolute; z-index:3; left:50%; top:-8%; bottom:-7%; width:2px; transform:translateX(-50%); background:linear-gradient(#e0c69a,#9d784e,#e0c69a); box-shadow:0 0 0 1px rgba(65,40,25,.14);}
+  .mock-envelope__knot{position:absolute; z-index:4; left:50%; top:52%; width:.56rem; height:.42rem; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle at 40% 35%,#ecd7ad,#aa8154 72%); box-shadow:0 2px 4px rgba(0,0,0,.35);}
+  .mock-envelope__hint{margin-top:.6rem; color:rgba(255,248,234,.58); font-family:var(--body); font-size:.25rem; letter-spacing:.08em; text-transform:uppercase;}
+
+  .list-rows{display:flex; flex-direction:column; gap:.6rem; min-width:0;}
+  .list-row{display:flex; gap:.6rem; align-items:flex-start; padding:.75rem; border:1px solid var(--line); border-radius:10px; background:var(--card); min-width:0;}
+  .list-row .list-row__fields{flex:1; min-width:0; display:flex; flex-direction:column; gap:.5rem;}
+  .icon-btn{border:1px solid var(--line); background:transparent; color:var(--ink-faint); width:1.9rem; height:1.9rem; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none;}
+  .icon-btn:hover{border-color:var(--accent); color:var(--accent);}
+  .add-row-btn{align-self:flex-start; margin-top:.7rem; font-size:.92rem; color:var(--accent); background:none; border:none; cursor:pointer; font-weight:600; padding:.3rem 0;}
+
+  /* ---------- Review ---------- */
+  .review-groups{display:grid; gap:.9rem; margin:1.2rem 0 1.6rem;}
+  .review-card{border:1px solid var(--line); border-radius:12px; padding:.85rem 1rem; background:var(--card);}
+  .review-card h3{font-size:.84rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-family:var(--body); font-weight:700; margin-bottom:.45rem;}
+  .review-card dl{margin:0; display:grid; grid-template-columns:auto 1fr; gap:.3rem .8rem; font-size:.94rem;}
+  .review-card dt{color:var(--ink-faint);}
+  .review-card dd{margin:0; color:var(--ink);}
+  .review-empty{color:var(--ink-faint); font-style:italic; font-size:.94rem;}
+
+  .submit-status{margin-top:.7rem; font-size:.94rem; color:var(--ink-soft); min-height:1.2em;}
+  .submit-status.is-error{color:var(--danger); font-weight:600;}
+
+  /* ---------- Buttons / nav ---------- */
+  .btn{display:inline-flex; align-items:center; gap:.45rem; padding:.72rem 1.3rem; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--ink); font-weight:600; font-size:.96rem; cursor:pointer; transition:.15s;}
+  .btn:hover{border-color:var(--accent); color:var(--accent);}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink);}
+  .btn.primary:hover{filter:brightness(1.06); color:var(--accent-ink);}
+  .btn:disabled{opacity:.4; cursor:default; pointer-events:none;}
+  .btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .navbar{
+    position:fixed; left:0; right:0; bottom:0; z-index:20;
+    background:var(--paper); border-top:1px solid var(--line);
+    padding:.75rem 1.1rem calc(.75rem + env(safe-area-inset-bottom));
+  }
+  .navbar__row{max-width:920px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:.8rem;}
+  .navbar__meta{font-size:.79rem; color:var(--ink-faint); font-family:var(--mono);}
+
+  .scroll-cue{
+    position:fixed; left:50%; bottom:calc(4.85rem + env(safe-area-inset-bottom)); z-index:19;
+    display:flex; align-items:center; gap:.42rem; transform:translateX(-50%);
+    padding:.52rem .82rem; border:1px solid color-mix(in srgb,var(--accent) 58%,transparent);
+    border-radius:999px; background:color-mix(in srgb,var(--paper) 91%,transparent);
+    color:var(--accent); box-shadow:0 8px 24px rgba(0,0,0,.18); backdrop-filter:blur(9px);
+    font-size:.8rem; font-weight:700; white-space:nowrap; pointer-events:none;
+    animation:scrollCueFloat 1.45s ease-in-out infinite;
+  }
+  .scroll-cue[hidden]{display:none;}
+  .scroll-cue svg{width:1rem; height:1rem; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+  @keyframes scrollCueFloat{
+    0%,100%{transform:translate(-50%,0); opacity:.82;}
+    50%{transform:translate(-50%,.42rem); opacity:1;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition-duration:.01ms !important;}
+    .scroll-cue{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="topbar">
+    <div class="topbar__row">
+      <div class="topbar__brand"><b>Briefing do Convite</b></div>
+      <div class="topbar__step" id="stepMeta">início</div>
+    </div>
+    <div class="progress"><i id="progressBar" style="width:0%"></i></div>
+  </div>
+
+  <div id="stage"></div>
+</div>
+
+<div class="scroll-cue" id="scrollCue" hidden aria-hidden="true">
+  <span>Continue descendo</span>
+  <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></svg>
+</div>
+
+<div class="navbar" id="navbar" style="display:none">
+  <div class="navbar__row">
+    <button class="btn" id="btnBack" type="button">← Voltar</button>
+    <span class="navbar__meta" id="navMeta"></span>
+    <button class="btn primary" id="btnNext" type="button">Avançar →</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORE_KEY = "briefing-convite-draft-v1";
+  var FIXED = {
+    noivo1:"Tarcísio Costa de Brito Bahia",
+    noivo2:"Ellen Pinto Santana",
+    paiNoivo:"Nelson de Souza Bahia Júnior",
+    maeNoivo:"Rosivania Cosa de Brito Bahia",
+    paiNoiva:"Josenias Santana",
+    maeNoiva:"Maria Emília Pinto Santana"
+  };
+
+  var state = {
+    noivo1:FIXED.noivo1, noivo2:FIXED.noivo2, dataCasamento:"", horaCasamento:"", cidadeUf:"",
+    envelopeEyebrow:"Um convite especial para você", envelopeFrase:"vão se casar", envelopeModo:"fechado",
+    capaModo:"montar",
+    simEyebrow:"O nosso sim", simTitulo:"", simParagrafo:"", simAssinatura:"",
+    paiNoivo:FIXED.paiNoivo, maeNoivo:FIXED.maeNoivo, paiNoiva:FIXED.paiNoiva, maeNoiva:FIXED.maeNoiva,
+    dataObs:"",
+    cerimoniaLocal:"", cerimoniaEndereco:"", cerimoniaCidadeUf:"", cerimoniaMapaLink:"", cerimoniaChegada:"",
+    rsvpPrazo:"", rsvpLink:"", presentesLink:"", dressCurto:"", dressDescricao:"", dressDica:"",
+    manualDicas:["",""],
+    memorias:[{legenda:"",foto:null},{legenda:"",foto:null},{legenda:"",foto:null},{legenda:"",foto:null},{legenda:"",foto:null}],
+    agradecimentoTitulo:"", agradecimentoMensagem:"", agradecimentoAssinatura:"",
+    musicaTipo:"spotify", musicaLink:"", musicaLinkYoutube:"", musicaObs:"",
+    observacoes:"",
+    capaFoto:null, simFoto:null, dataFoto:null, agradecimentoFoto:null, envelopeFoto:null
+  };
+
+  function loadDraft(){
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      if(!raw) return;
+      var saved = JSON.parse(raw);
+      Object.keys(saved).forEach(function(k){
+        if(k in state && !/Foto$/.test(k) && k !== "memorias"){ state[k] = saved[k]; }
+      });
+      if(Array.isArray(saved.manualDicas)) state.manualDicas = saved.manualDicas;
+      if(Array.isArray(saved.memorias)){
+        state.memorias = saved.memorias.map(function(m){ return {legenda:(m&&m.legenda)||"", foto:null}; });
+      }
+    }catch(e){}
+  }
+  function saveDraft(){
+    try{
+      var copy = JSON.parse(JSON.stringify(state, function(k,v){
+        if(/Foto$/.test(k)) return undefined;
+        return v;
+      }));
+      copy.memorias = state.memorias.map(function(m){ return {legenda:m.legenda}; });
+      localStorage.setItem(STORE_KEY, JSON.stringify(copy));
+    }catch(e){}
+  }
+  loadDraft();
+  Object.keys(FIXED).forEach(function(k){ state[k] = FIXED[k]; });
+  state.envelopeModo = "fechado";
+  state.envelopeFoto = null;
+
+  function esc(s){
+    return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function fmtDate(iso){
+    if(!iso) return null;
+    try{
+      var d = new Date(iso+"T00:00:00");
+      var dia = d.toLocaleDateString("pt-BR",{day:"2-digit"});
+      var mes = d.toLocaleDateString("pt-BR",{month:"long"});
+      var ano = d.toLocaleDateString("pt-BR",{year:"numeric"});
+      var semana = d.toLocaleDateString("pt-BR",{weekday:"long"});
+      return {dia:dia, mes:mes, ano:ano, semana:semana};
+    }catch(e){ return null; }
+  }
+  function fmtHora(hhmm){
+    if(!hhmm) return "";
+    var parts = hhmm.split(":");
+    return parts[0]+"h"+(parts[1]!=="00"?parts[1]:"");
+  }
+
+  /* ---------------- Steps config ---------------- */
+
+  var steps = [
+    {id:"sobre", title:"Dados da cerimônia", kicker:"Dados gerais", hint:"Os nomes já estão definidos. Agora precisamos apenas da data, do horário e da cidade da cerimônia.", fixedInfo:{label:"Nomes já confirmados", items:[
+        {label:"Noivo", value:FIXED.noivo1},
+        {label:"Noiva", value:FIXED.noivo2}
+      ]},
+      fields:[
+        {key:"dataCasamento", label:"Data da cerimônia", type:"date", half:true},
+        {key:"horaCasamento", label:"Horário da cerimônia", type:"time", half:true},
+        {key:"cidadeUf", label:"Cidade da cerimônia", type:"text", placeholder:"Ex.: Feira de Santana — BA"}
+      ]},
+    {id:"abertura", title:"Abertura do envelope", kicker:"Tela 1 · Envelope", hint:"A primeira coisa que o convidado vê será um envelope totalmente fechado. A carta, a foto e os nomes ficam escondidos até a abertura.",
+      fields:[
+        {key:"envelopeEyebrow", label:"Frase acima do envelope", type:"text"},
+        {key:"envelopeFrase", label:"Frase abaixo dos nomes, dentro da carta", type:"text", placeholder:"vão se casar"}
+      ]},
+    {id:"capa", title:"Capa do convite", kicker:"Tela 2 · Capa", hint:"A primeira página do livro, com foto do casal e o convite formal.",
+      fields:[
+        {key:"capaModo", label:"Como fica a arte da capa?", type:"radio", options:[
+          {value:"montar", label:"Montem a partir de uma foto"},
+          {value:"pronta", label:"Já temos uma arte pronta"},
+          {value:"sem_arte", label:"Não precisa de arte, só as fotos"}
+        ]},
+        {key:"capaFoto", label:"Foto ou arte da capa", type:"photo"}
+      ]},
+    {id:"sim", title:"O nosso sim", kicker:"Tela 3 · A história", hint:"Um espaço curto para contar, com carinho, como a história de vocês começou.", fixedInfo:{label:"Pais já confirmados", items:[
+        {label:"Pais de Tarcísio", value:FIXED.paiNoivo+" e "+FIXED.maeNoivo},
+        {label:"Pais de Ellen", value:FIXED.paiNoiva+" e "+FIXED.maeNoiva}
+      ]},
+      fields:[
+        {key:"simEyebrow", label:"Categoria da página", type:"text"},
+        {key:"simTitulo", label:"Frase de efeito / título", type:"textarea", placeholder:"Deus transformou dois caminhos em uma só jornada."},
+        {key:"simParagrafo", label:"Texto de introdução", type:"textarea", placeholder:"Com a bênção de Deus e de seus pais, [nomes] convidam você para celebrar..."},
+        {key:"simAssinatura", label:"Frase de assinatura", type:"text", placeholder:"Onde houver amor, ali estaremos."},
+        {key:"simFoto", label:"Foto do casal", type:"photo"}
+      ]},
+    {id:"data", title:"Salve a data", kicker:"Tela 4 · Contagem regressiva", hint:"Usaremos a data e o horário que vocês informaram na primeira etapa, com uma contagem regressiva ao vivo.",
+      fields:[
+        {key:"dataFoto", label:"Foto para essa página", type:"photo"},
+        {key:"dataObs", label:"Alguma observação sobre horário de chegada?", type:"text", optional:true}
+      ]},
+    {id:"cerimonia", title:"Cerimônia", kicker:"Tela 5 · Local", hint:"Onde e como encontrar vocês no grande dia.",
+      fields:[
+        {key:"cerimoniaLocal", label:"Nome do local", type:"text", placeholder:"Ex.: Fazenda Recanto das Oliveiras"},
+        {key:"cerimoniaEndereco", label:"Endereço", type:"text", placeholder:"Rua, número"},
+        {key:"cerimoniaCidadeUf", label:"Cidade — Estado", type:"text"},
+        {key:"cerimoniaMapaLink", label:"Link do Google Maps", type:"url", optional:true},
+        {key:"cerimoniaChegada", label:"Recomendação sobre chegada", type:"textarea", placeholder:"A cerimônia começa às 16h30. Sugerimos chegar com 30 minutos de antecedência."}
+      ]},
+    {id:"musica", title:"Trilha sonora", kicker:"Tela 9 · Música", hint:"O convite pode tocar uma música ao ser aberto.",
+      fields:[
+        {key:"musicaTipo", label:"Como vai funcionar a música?", type:"radio", options:[
+          {value:"spotify", label:"Link do Spotify"},
+          {value:"youtube", label:"Link do YouTube"},
+          {value:"mp3", label:"Arquivo mp3 licenciado"},
+          {value:"nenhuma", label:"Sem música"}
+        ]},
+        {key:"musicaLink", label:"Link da playlist ou faixa no Spotify", type:"url", showIf:{musicaTipo:"spotify"}},
+        {key:"musicaLinkYoutube", label:"Link do vídeo no YouTube", type:"url", showIf:{musicaTipo:"youtube"}, help:"Não precisa ter o arquivo pronto — manda o link do YouTube que a equipe baixa o áudio depois."},
+        {key:"musicaObs", label:"Nome do arquivo mp3 que vocês vão enviar", type:"text", showIf:{musicaTipo:"mp3"}}
+      ]}
+  ];
+
+  var STEP_IDS = ["welcome","sobre","abertura","capa","sim","data","cerimonia","convidados","memorias","agradecimento","musica","revisao"];
+  var current = 0;
+  var presetLoaded = false;
+
+  var stage = document.getElementById("stage");
+  var progressBar = document.getElementById("progressBar");
+  var stepMeta = document.getElementById("stepMeta");
+  var navbar = document.getElementById("navbar");
+  var scrollCue = document.getElementById("scrollCue");
+  var navMeta = document.getElementById("navMeta");
+  var btnBack = document.getElementById("btnBack");
+  var btnNext = document.getElementById("btnNext");
+
+  function shouldShow(field){
+    if(!field.showIf) return true;
+    var k = Object.keys(field.showIf)[0];
+    return state[k] === field.showIf[k];
+  }
+
+  function renderField(f){
+    var val = state[f.key];
+    var wrapClass = "field" + (f.half ? " half" : "");
+    var label = '<label for="f_'+f.key+'">'+esc(f.label)+(f.optional?' <span class="sub">(opcional)</span>':'')+'</label>';
+    var helpHtml = f.help ? '<p class="field-help">'+esc(f.help)+'</p>' : "";
+    var control = "";
+    if(f.type === "text" || f.type === "url" || f.type === "date" || f.type === "time"){
+      control = '<input id="f_'+f.key+'" data-key="'+f.key+'" type="'+f.type+'" placeholder="'+esc(f.placeholder||"")+'" value="'+esc(val)+'" />';
+    } else if(f.type === "textarea"){
+      control = '<textarea id="f_'+f.key+'" data-key="'+f.key+'" placeholder="'+esc(f.placeholder||"")+'">'+esc(val)+'</textarea>';
+    } else if(f.type === "radio"){
+      control = '<div class="radio-row">' + f.options.map(function(o){
+        var checked = state[f.key] === o.value ? "checked" : "";
+        return '<label class="radio-chip"><input type="radio" name="'+f.key+'" data-key="'+f.key+'" value="'+o.value+'" '+checked+' /><span>'+esc(o.label)+'</span></label>';
+      }).join("") + '</div>';
+    } else if(f.type === "photo"){
+      control = renderPhotoField(f.key, val);
+    }
+    return '<div class="'+wrapClass+'">'+label+helpHtml+control+'</div>';
+  }
+
+  function renderPhotoField(key, file){
+    var thumb = file ? '<img src="'+file.dataUrl+'" alt="" />' : "＋";
+    var name = file ? esc(file.name) : "Nenhuma imagem escolhida ainda";
+    return '<div class="photo-field">'+
+      '<div class="photo-thumb">'+thumb+'</div>'+
+      '<label class="photo-btn">📷 Escolher<input type="file" accept="image/*" data-photo="'+key+'" style="display:none" /></label>'+
+      '<span class="photo-name">'+name+'</span>'+
+      '</div>';
+  }
+
+  function renderStepFields(st){
+    var html = st.fixedInfo ? renderFixedInfo(st.fixedInfo) : "";
+    var i = 0;
+    while(i < st.fields.length){
+      var f = st.fields[i];
+      if(!shouldShow(f)){ i++; continue; }
+      if(f.half && st.fields[i+1] && st.fields[i+1].half && shouldShow(st.fields[i+1])){
+        html += '<div class="two-col">'+renderField(f)+renderField(st.fields[i+1])+'</div>';
+        i += 2;
+      } else {
+        html += renderField(f);
+        i += 1;
+      }
+    }
+    return html;
+  }
+
+  function renderFixedInfo(info){
+    return '<section class="fixed-info" aria-label="'+esc(info.label)+'">'+
+      '<span class="fixed-info__label">'+esc(info.label)+'</span>'+
+      '<div class="fixed-info__grid">'+info.items.map(function(item){
+        return '<div class="fixed-info__item"><small>'+esc(item.label)+'</small><strong>'+esc(item.value)+'</strong></div>';
+      }).join("")+'</div></section>';
+  }
+
+  /* ---------- Custom steps: convidados, memorias, agradecimento, revisao, welcome ---------- */
+
+  function renderConvidados(){
+    var tipsHtml = state.manualDicas.map(function(t,idx){
+      return '<div class="list-row" data-tip-row="'+idx+'">'+
+        '<div class="list-row__fields"><input type="text" data-tip-input="'+idx+'" value="'+esc(t)+'" placeholder="Ex.: Chegue até as 16h para se acomodar com tranquilidade." /></div>'+
+        '<button class="icon-btn" type="button" data-tip-remove="'+idx+'" aria-label="Remover dica">✕</button>'+
+      '</div>';
+    }).join("");
+    return '' +
+      renderFieldRaw("rsvpPrazo","Prazo para confirmar presença","text","Ex.: Até 21 de março") +
+      renderFieldRaw("rsvpLink","Link ou contato para confirmar presença","text","WhatsApp, formulário, etc.") +
+      renderFieldRaw("presentesLink","Link da lista de presentes","text","") +
+      renderFieldRaw("dressCurto","Dress code (resumo curto)","text","Ex.: Esporte fino rústico") +
+      renderFieldRaw("dressDescricao","Descrição do dress code","textarea","") +
+      renderFieldRaw("dressDica","Uma dica prática de dress code (opcional)","text","Ex.: prefira saltos grossos ou calçados confortáveis para o gramado.",true,"Aparece como dica extra na janela de detalhes do dress code.") +
+      '<div class="field"><label>Dicas extras para os convidados</label><p class="field-help">O convite já traz um manual padrão (horário de chegada, cerimônia ao ar livre, fotos por conta da equipe, celebração após o "sim"). Use este espaço só para dicas específicas de vocês, além dessas.</p><div class="list-rows" id="tipsRows">'+tipsHtml+'</div>'+
+      '<button class="add-row-btn" type="button" id="addTip">+ Adicionar dica</button></div>';
+  }
+
+  function renderFieldRaw(key,label,type,placeholder,optional,help){
+    var val = state[key];
+    var lab = '<label for="f_'+key+'">'+esc(label)+(optional?' <span class="sub">(opcional)</span>':'')+'</label>';
+    var helpHtml = help ? '<p class="field-help">'+esc(help)+'</p>' : "";
+    if(type==="textarea") return '<div class="field">'+lab+helpHtml+'<textarea id="f_'+key+'" data-key="'+key+'" placeholder="'+esc(placeholder||"")+'">'+esc(val)+'</textarea></div>';
+    return '<div class="field">'+lab+helpHtml+'<input id="f_'+key+'" data-key="'+key+'" type="text" placeholder="'+esc(placeholder||"")+'" value="'+esc(val)+'" /></div>';
+  }
+
+  function renderMemorias(){
+    var rows = state.memorias.map(function(m,idx){
+      var thumb = m.foto ? '<img src="'+m.foto.dataUrl+'" alt="" />' : "＋";
+      var name = m.foto ? esc(m.foto.name) : "sem foto ainda";
+      return '<div class="list-row" data-mem-row="'+idx+'">'+
+        '<div class="list-row__fields">'+
+          '<input type="text" data-mem-legenda="'+idx+'" value="'+esc(m.legenda)+'" placeholder="Legenda, ex.: nossos encontros" />'+
+          '<div class="photo-field"><div class="photo-thumb">'+thumb+'</div>'+
+          '<label class="photo-btn">📷 Foto<input type="file" accept="image/*" data-mem-foto="'+idx+'" style="display:none" /></label>'+
+          '<span class="photo-name">'+name+'</span></div>'+
+        '</div>'+
+        '<button class="icon-btn" type="button" data-mem-remove="'+idx+'" aria-label="Remover foto">✕</button>'+
+      '</div>';
+    }).join("");
+    return '<div class="field"><label>Fotos da galeria de memórias</label><div class="list-rows" id="memRows">'+rows+'</div>'+
+      '<button class="add-row-btn" type="button" id="addMem">+ Adicionar foto</button></div>';
+  }
+
+  function renderAgradecimento(){
+    return renderPhotoFieldBlock("agradecimentoFoto","Foto de encerramento") +
+      renderFieldRaw("agradecimentoTitulo","Frase de destaque","text","Ex.: Será uma alegria ter você conosco.") +
+      renderFieldRaw("agradecimentoMensagem","Mensagem final de agradecimento","textarea","") +
+      renderFieldRaw("agradecimentoAssinatura","Assinatura","text","Ex.: Com carinho, Eliel & Anne");
+  }
+  function renderPhotoFieldBlock(key,label){
+    return '<div class="field"><label>'+esc(label)+'</label>'+renderPhotoField(key,state[key])+'</div>';
+  }
+
+  function nonEmpty(v){ return v!=null && String(v).trim()!==""; }
+
+  function reviewSection(title, rows){
+    var visible = rows.filter(function(r){ return nonEmpty(r[1]); });
+    var body = visible.length
+      ? '<dl>' + visible.map(function(r){ return '<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>'; }).join("") + '</dl>'
+      : '<p class="review-empty">Nada preenchido ainda.</p>';
+    return '<div class="review-card"><h3>'+esc(title)+'</h3>'+body+'</div>';
+  }
+
+  function renderRevisao(){
+    var d = fmtDate(state.dataCasamento);
+    var dataTxt = d ? (d.dia+" de "+d.mes+" de "+d.ano+" ("+d.semana+")") : "";
+    var groups = [
+      reviewSection("Sobre vocês", [
+        ["Noivos", [state.noivo1,state.noivo2].filter(nonEmpty).join(" & ")],
+        ["Data", dataTxt],
+        ["Horário", fmtHora(state.horaCasamento)],
+        ["Cidade", state.cidadeUf]
+      ]),
+      reviewSection("Envelope", [["Boas-vindas", state.envelopeEyebrow],["Abertura", "Envelope fechado, sem prévia da carta ou foto"],["Frase da carta", state.envelopeFrase]]),
+      reviewSection("Capa", [["Modo", state.capaModo==="pronta"?"Arte pronta":state.capaModo==="sem_arte"?"Sem arte, só as fotos":"Montar a partir de foto"],["Foto escolhida", state.capaFoto?state.capaFoto.name:""]]),
+      reviewSection("O nosso sim", [["Categoria",state.simEyebrow],["Título",state.simTitulo],["Texto",state.simParagrafo],["Assinatura",state.simAssinatura],["Foto",state.simFoto?state.simFoto.name:""],["Pais de Tarcísio",state.paiNoivo+" e "+state.maeNoivo],["Pais de Ellen",state.paiNoiva+" e "+state.maeNoiva]]),
+      reviewSection("Salve a data", [["Observação",state.dataObs],["Foto",state.dataFoto?state.dataFoto.name:""]]),
+      reviewSection("Cerimônia", [["Local",state.cerimoniaLocal],["Endereço",state.cerimoniaEndereco],["Cidade/UF",state.cerimoniaCidadeUf],["Mapa",state.cerimoniaMapaLink],["Chegada",state.cerimoniaChegada]]),
+      reviewSection("Para os convidados", [["Prazo RSVP",state.rsvpPrazo],["Link RSVP",state.rsvpLink],["Presentes",state.presentesLink],["Dress code",state.dressCurto],["Descrição",state.dressDescricao],["Dica extra",state.dressDica],["Dicas extras",state.manualDicas.filter(nonEmpty).join(" · ")]]),
+      reviewSection("Memórias", [["Fotos",state.memorias.filter(function(m){return nonEmpty(m.legenda)||m.foto;}).map(function(m){return (m.legenda||"(sem legenda)")+(m.foto?" ["+m.foto.name+"]":"");}).join(" · ")]]),
+      reviewSection("Agradecimento", [["Frase de destaque",state.agradecimentoTitulo],["Mensagem",state.agradecimentoMensagem],["Assinatura",state.agradecimentoAssinatura],["Foto",state.agradecimentoFoto?state.agradecimentoFoto.name:""]]),
+      reviewSection("Música", [["Tipo",state.musicaTipo],["Link Spotify",state.musicaLink],["Link YouTube",state.musicaLinkYoutube],["Arquivo",state.musicaObs]])
+    ].join("");
+
+    return '<div class="field"><label>Mais alguma coisa que a gente devia saber?</label><textarea id="f_observacoes" data-key="observacoes" placeholder="Qualquer detalhe extra, fora da lista.">'+esc(state.observacoes)+'</textarea></div>' +
+      '<div class="review-groups">'+groups+'</div>' +
+      '<button class="btn primary" id="submitBtn" type="button">Enviar respostas</button>' +
+      '<p class="submit-status" id="submitStatus"></p>';
+  }
+
+  function renderWelcome(){
+    return '<div class="welcome">'+
+      '<span class="welcome__eyebrow">Para Tarcísio & Ellen</span>'+
+      '<h1>Que alegria fazer parte<br/>da reta final de vocês!</h1>'+
+      '<p class="lead">Esse formulário foi pensado 100% personalizado para o casamento de vocês — cada resposta que vocês derem aqui vira parte do convite, com todo o cuidado e capricho que essa data merece. Parabéns pela união, e obrigado por confiarem esse momento tão especial a nós!</p>'+
+      '<div class="welcome__list">'+
+        '<div><b>01</b><span>Responda telas curtas, no seu ritmo — as respostas ficam salvas neste navegador até você enviar.</span></div>'+
+        '<div><b>02</b><span>Escolha fotos do celular para ver uma prévia em cada tela.</span></div>'+
+        '<div><b>03</b><span>No final, é só tocar em enviar. Pronto — a gente cuida do resto.</span></div>'+
+      '</div>'+
+      '<button class="btn primary" id="startBtn" type="button">Começar briefing →</button>'+
+    '</div>';
+  }
+
+  function renderDone(){
+    stage.innerHTML = '<div class="welcome">'+
+      '<span class="welcome__eyebrow">Tudo certo</span>'+
+      '<h1>Respostas enviadas!</h1>'+
+      '<p class="lead">Muito obrigado por preencher com tanto carinho. Vamos usar tudo isso para montar o convite de vocês — em breve mostramos o resultado.</p>'+
+    '</div>';
+    navbar.style.display = "none";
+    scrollCue.hidden = true;
+    progressBar.style.width = "100%";
+  }
+
+  /* ---------------- Mock preview per step ---------------- */
+
+  function mockPhoto(has, small){
+    if(has) return '<div class="mock-photo" style="'+(small||'')+'"><img src="'+has.dataUrl+'" /></div>';
+    return '<div class="mock-photo" style="'+(small||'')+'"><svg viewBox="0 0 24 24" fill="none" stroke="'+ 'currentColor' +'" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 17-6-5-4 4-3-3-5 4"/></svg></div>';
+  }
+
+  function renderMock(stepId){
+    var n1 = state.noivo1, n2 = state.noivo2;
+    var nome1 = n1.split(" ")[0], nome2 = n2.split(" ")[0];
+    var d = fmtDate(state.dataCasamento);
+    var diaMes = d ? (d.dia+"·"+d.mes.slice(0,3).toUpperCase()) : "00·MÊS";
+    var ano = d ? d.ano : "AAAA";
+
+    if(stepId==="welcome") return "";
+
+    if(stepId==="sobre"){
+      var details = d ? (d.dia+" de "+d.mes+" de "+d.ano) : "Data da cerimônia";
+      var timeCity = [fmtHora(state.horaCasamento), state.cidadeUf].filter(nonEmpty).join(" · ") || "Horário · Cidade";
+      return '<div class="mock-screen mock-general"><div class="mock-general__frame">'+
+        '<div class="mock-eyebrow">Convite de casamento</div>'+
+        '<div class="mock-general__names">'+esc(nome1)+' <span>&amp;</span> '+esc(nome2)+'</div>'+
+        '<div class="mock-general__rule"></div>'+
+        '<div class="mock-general__details">'+esc(details)+'<br/>'+esc(timeCity)+'</div>'+
+      '</div></div>';
+    }
+    if(stepId==="abertura"){
+      return '<div class="mock-screen mock-envelope">'+
+        '<div class="mock-eyebrow" style="color:rgba(255,248,234,.78);">'+esc(state.envelopeEyebrow||"Um convite especial para você")+'</div>'+
+        '<div class="mock-envelope__stage" aria-hidden="true"><div class="mock-envelope__body"></div><div class="mock-envelope__bottom"></div><div class="mock-envelope__flap"></div><div class="mock-envelope__cord"></div><div class="mock-envelope__knot"></div></div>'+
+        '<div class="mock-envelope__hint">Toque na corda para abrir</div>'+
+      '</div>';
+    }
+    if(stepId==="capa"){
+      return '<div class="mock-screen" style="padding:.35rem;">'+
+        mockPhoto(state.capaFoto, "flex:1;border-radius:2px;") +
+        '<div style="text-align:center;padding:.5rem .3rem;">'+
+          '<div class="mock-eyebrow" style="font-size:.38rem;">Convite de Casamento</div>'+
+          '<div class="mock-script" style="font-size:1.15rem;color:var(--mock-rust);margin-top:.2rem;">'+esc(nome1)+'</div>'+
+          '<div class="mock-script" style="font-size:1.15rem;color:var(--mock-rust);">&amp; '+esc(nome2)+'</div>'+
+          '<div style="font-size:.32rem;color:var(--mock-soft);margin-top:.3rem;">'+esc(diaMes)+' · '+esc(ano)+'</div>'+
+        '</div>'+
+      '</div>';
+    }
+    if(stepId==="sim"){
+      return '<div class="mock-screen" style="padding:.55rem;text-align:center;">'+
+        '<div class="mock-eyebrow">'+esc(state.simEyebrow||"O nosso sim")+'</div>'+
+        '<div class="mock-h" style="font-size:.68rem;margin-top:.2rem;">'+esc(state.simTitulo||"Uma frase de efeito bonita entra aqui.")+'</div>'+
+        mockPhoto(state.simFoto,"width:60%;height:30%;margin:.4rem auto;border-radius:2px;")+
+        '<div style="font-size:.3rem;color:var(--mock-soft);line-height:1.5;">'+esc(state.simParagrafo||"Texto contando como tudo começou.")+'</div>'+
+        '<div style="display:flex;gap:.3rem;justify-content:center;margin-top:.35rem;font-size:.26rem;color:var(--mock-soft);">'+
+          '<div><span style="display:block;text-transform:uppercase;letter-spacing:.05em;font-size:.22rem;color:var(--mock-rust);">Pais do noivo</span>'+esc(state.paiNoivo||"—")+'<br/>'+esc(state.maeNoivo||"—")+'</div>'+
+          '<div><span style="display:block;text-transform:uppercase;letter-spacing:.05em;font-size:.22rem;color:var(--mock-rust);">Pais da noiva</span>'+esc(state.paiNoiva||"—")+'<br/>'+esc(state.maeNoiva||"—")+'</div>'+
+        '</div>'+
+        '<div class="mock-script" style="font-size:.55rem;margin-top:.35rem;color:var(--mock-ink);">'+esc(state.simAssinatura||"Onde houver amor, ali estaremos.")+'</div>'+
+      '</div>';
+    }
+    if(stepId==="data"){
+      return '<div class="mock-screen" style="padding:.55rem;text-align:center;">'+
+        '<div class="mock-eyebrow">Salve esta data</div>'+
+        '<div class="mock-h" style="font-size:1.4rem;margin-top:.15rem;">'+esc(d?d.dia:"00")+'</div>'+
+        '<div class="mock-script" style="font-size:1.5rem;color:var(--mock-ink);line-height:.9;">'+esc(d?d.mes:"Mês")+'</div>'+
+        '<div style="font-size:.34rem;color:var(--mock-soft);margin-top:.25rem;">'+esc(d?(d.semana+" · às "+fmtHora(state.horaCasamento)):"dia da semana · horário")+'</div>'+
+        mockPhoto(state.dataFoto,"width:55%;height:32%;margin:.45rem auto;border-radius:2px;")+
+        '<div style="display:flex;gap:.15rem;justify-content:center;margin-top:.3rem;">'+
+          ["dias","hrs","min","seg"].map(function(u){return '<div style="background:rgba(255,251,242,.7);border:1px solid rgba(78,56,40,.15);padding:.2rem .28rem;font-size:.32rem;">'+u+'</div>';}).join("")+
+        '</div>'+
+      '</div>';
+    }
+    if(stepId==="cerimonia"){
+      return '<div class="mock-screen" style="padding:.5rem;">'+
+        '<div style="text-align:center;">'+
+          '<div class="mock-eyebrow">Cerimônia & celebração</div>'+
+          '<div class="mock-h" style="font-size:.6rem;margin-top:.1rem;">Esperamos você</div>'+
+        '</div>'+
+        '<div style="display:flex;flex-direction:column;gap:.25rem;margin-top:.4rem;">'+
+          '<div style="display:flex;gap:.25rem;align-items:flex-start;background:rgba(255,251,243,.75);border:1px solid rgba(79,57,41,.14);border-radius:3px;padding:.28rem .32rem;">'+
+            '<span style="flex:none;font-family:var(--serif);font-size:.28rem;color:var(--mock-gold);">01</span>'+
+            '<div style="font-size:.28rem;line-height:1.35;">'+
+              '<b style="display:block;font-family:var(--serif);font-size:.42rem;color:var(--mock-ink);">'+esc(state.cerimoniaLocal||"Nome do local")+'</b>'+
+              '<span style="color:var(--mock-soft);">'+esc(state.cerimoniaEndereco||"Endereço")+' · '+esc(state.cerimoniaCidadeUf||"Cidade — UF")+'</span>'+
+            '</div>'+
+          '</div>'+
+          '<div style="display:flex;gap:.25rem;align-items:flex-start;background:rgba(255,251,243,.75);border:1px solid rgba(79,57,41,.14);border-radius:3px;padding:.28rem .32rem;">'+
+            '<span style="flex:none;font-family:var(--serif);font-size:.28rem;color:var(--mock-gold);">02</span>'+
+            '<div style="font-size:.28rem;line-height:1.35;">'+
+              '<b style="display:block;font-family:var(--serif);font-size:.42rem;color:var(--mock-ink);">Chegue com carinho</b>'+
+              '<span style="color:var(--mock-soft);">'+esc(state.cerimoniaChegada||"Recomendação de chegada")+'</span>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    }
+    if(stepId==="convidados"){
+      return '<div class="mock-screen dark" style="padding:.5rem;">'+
+        '<div style="text-align:center;">'+
+          '<div class="mock-eyebrow">Guia do grande dia</div>'+
+          '<div class="mock-h" style="font-size:.6rem;margin-top:.1rem;">Tudo para celebrar conosco</div>'+
+        '</div>'+
+        '<div style="display:flex;flex-direction:column;gap:.2rem;margin-top:.4rem;">'+
+          [["Confirmar presença", state.rsvpPrazo?("Responder até "+state.rsvpPrazo):"Confirme sua presença"],
+           ["Lista de presentes","Escolha com carinho"],
+           ["Dress code", state.dressCurto||"Esporte fino rústico"],
+           ["Manual dos convidados","Horários, chegada e orientações"]].map(function(r){
+            return '<div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:3px;padding:.26rem .34rem;display:flex;justify-content:space-between;align-items:center;gap:.2rem;">'+
+              '<span style="font-size:.29rem;line-height:1.3;"><b style="display:block;font-size:.31rem;">'+esc(r[0])+'</b><span style="opacity:.7;">'+esc(r[1])+'</span></span>'+
+              '<span style="opacity:.6;font-size:.32rem;">→</span></div>';
+          }).join("")+
+        '</div>'+
+      '</div>';
+    }
+    if(stepId==="memorias"){
+      var pics = state.memorias.slice(0,5);
+      return '<div class="mock-screen" style="padding:.5rem;text-align:center;">'+
+        '<div class="mock-eyebrow">Um pouco de nós</div>'+
+        '<div class="mock-h" style="font-size:.56rem;margin-top:.12rem;">Memórias que nos trouxeram até aqui</div>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.2rem;margin-top:.4rem;">'+
+          pics.map(function(m,i){
+            var span = i===4 ? "grid-column:1/-1;" : "";
+            return '<div style="'+span+'">'+mockPhoto(m.foto,"height:"+(i===4?"3.2rem":"2.2rem")+";border-radius:1px;")+'<div class="mock-script" style="font-size:.38rem;margin-top:.08rem;">'+esc(m.legenda||"legenda")+'</div></div>';
+          }).join("")+
+        '</div>'+
+      '</div>';
+    }
+    if(stepId==="agradecimento"){
+      return '<div class="mock-screen" style="padding:.55rem;text-align:center;">'+
+        '<div class="mock-script" style="font-size:.62rem;color:var(--mock-ink);">'+esc(nome1)+' &amp; '+esc(nome2)+'</div>'+
+        mockPhoto(state.agradecimentoFoto,"width:60%;height:30%;margin:.3rem auto;border-radius:2px;")+
+        '<div class="mock-eyebrow">Obrigado por fazer parte da nossa história</div>'+
+        '<div class="mock-h" style="font-size:.52rem;margin-top:.12rem;">'+esc(state.agradecimentoTitulo||"Será uma alegria ter você conosco.")+'</div>'+
+        '<div style="font-size:.28rem;color:var(--mock-soft);line-height:1.4;margin-top:.15rem;">'+esc(state.agradecimentoMensagem||"Mensagem final de agradecimento.")+'</div>'+
+        '<div class="mock-script" style="font-size:.5rem;margin-top:.3rem;color:var(--mock-rust);">'+esc(state.agradecimentoAssinatura||"Com carinho, "+nome1+" & "+nome2)+'</div>'+
+      '</div>';
+    }
+    if(stepId==="musica"){
+      return '<div class="mock-screen dark" style="align-items:center;justify-content:center;text-align:center;padding:.7rem;">'+
+        '<div style="width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:1rem;">♪</div>'+
+        '<div style="font-size:.36rem;margin-top:.5rem;letter-spacing:.08em;text-transform:uppercase;">'+
+          (state.musicaTipo==="spotify"?"tocando via spotify":state.musicaTipo==="youtube"?"trilha do youtube":state.musicaTipo==="mp3"?"trilha licenciada":"sem trilha sonora")+
+        '</div>'+
+      '</div>';
+    }
+    if(stepId==="revisao"){
+      return '<div class="mock-screen" style="align-items:center;justify-content:center;text-align:center;padding:.9rem;">'+
+        '<div style="font-size:1.6rem;">✅</div>'+
+        '<div class="mock-h" style="font-size:.6rem;margin-top:.5rem;">Pronto para enviar</div>'+
+        '<div style="font-size:.32rem;color:var(--mock-soft);margin-top:.3rem;">'+esc(n1)+' &amp; '+esc(n2)+'</div>'+
+      '</div>';
+    }
+    return "";
+  }
+
+  /* ---------------- Render / navigation ---------------- */
+
+  function currentStepDef(){
+    var id = STEP_IDS[current];
+    return steps.filter(function(s){return s.id===id;})[0];
+  }
+
+  function render(){
+    var id = STEP_IDS[current];
+    saveDraft();
+
+    if(id === "welcome"){
+      stage.innerHTML = renderWelcome();
+      navbar.style.display = "none";
+      scrollCue.hidden = true;
+      progressBar.style.width = "0%";
+      stepMeta.textContent = "início";
+      document.getElementById("startBtn").addEventListener("click", function(){ current=1; render(); window.scrollTo(0,0); });
+      return;
+    }
+
+    navbar.style.display = "block";
+    var total = STEP_IDS.length - 1;
+    var pos = current;
+    progressBar.style.width = Math.round((pos/total)*100)+"%";
+    stepMeta.textContent = "etapa "+pos+" de "+total;
+    navMeta.textContent = pos+"/"+total;
+
+    var body;
+    if(id === "convidados") body = renderConvidados();
+    else if(id === "memorias") body = renderMemorias();
+    else if(id === "agradecimento") body = renderAgradecimento();
+    else if(id === "revisao") body = renderRevisao();
+    else body = renderStepFields(currentStepDef());
+
+    var titleObj = id==="convidados" ? {title:"Para os convidados",kicker:"Tela 6 · Confirmação",hint:"Tudo que os convidados precisam encontrar em um só lugar: confirmação, presentes, dress code e dicas."}
+      : id==="memorias" ? {title:"Nossas memórias",kicker:"Tela 7 · Galeria",hint: presetLoaded ? "Já registramos as fotos que vocês escolheram — só falta escrever a legenda de cada uma, sabendo qual foto vai receber o texto." : "Uma pequena galeria com fotos e legendas curtas."}
+      : id==="agradecimento" ? {title:"Agradecimento",kicker:"Tela 8 · Encerramento",hint:"A última página do livro, para fechar com carinho."}
+      : id==="revisao" ? {title:"Revisão final",kicker:"Última etapa",hint:"Confira tudo antes de enviar."}
+      : currentStepDef();
+
+    stage.innerHTML =
+      '<div class="step">'+
+        '<div class="mock-col"><div class="mock-tag">'+esc(titleObj.kicker)+'</div><div class="mock-phone"><div id="mockSlot"></div></div></div>'+
+        '<div class="field-col">'+
+          '<div class="step-kicker">'+esc(titleObj.kicker)+'</div>'+
+          '<h2>'+esc(titleObj.title)+'</h2>'+
+          '<p class="step-hint">'+esc(titleObj.hint)+'</p>'+
+          body+
+        '</div>'+
+      '</div>';
+
+    document.getElementById("mockSlot").outerHTML = renderMock(id);
+    wireInputs(id);
+
+    btnBack.disabled = current === 1;
+    btnNext.style.visibility = id === "revisao" ? "hidden" : "visible";
+    requestAnimationFrame(updateScrollCue);
+  }
+
+  function updateScrollCue(){
+    var step = document.querySelector(".step");
+    if(!step || navbar.style.display === "none"){
+      scrollCue.hidden = true;
+      return;
+    }
+    var navHeight = navbar.offsetHeight || 72;
+    var visibleBottom = window.innerHeight - navHeight - 18;
+    scrollCue.hidden = step.getBoundingClientRect().bottom <= visibleBottom + 10;
+  }
+
+  function updateMockOnly(){
+    var id = STEP_IDS[current];
+    var slot = document.querySelector(".mock-phone");
+    if(slot) slot.innerHTML = renderMock(id);
+  }
+
+  function readAndCompressImage(file, cb){
+    var reader = new FileReader();
+    reader.onload = function(){
+      var img = new Image();
+      img.onload = function(){
+        var maxDim = 1400;
+        var scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        var w = Math.max(1, Math.round(img.width * scale));
+        var h = Math.max(1, Math.round(img.height * scale));
+        var canvas = document.createElement("canvas");
+        canvas.width = w; canvas.height = h;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, w, h);
+        var dataUrl = canvas.toDataURL("image/jpeg", 0.8);
+        cb({name: file.name, dataUrl: dataUrl});
+      };
+      img.onerror = function(){ cb({name:file.name, dataUrl: reader.result}); };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function wireInputs(id){
+    var root = document.getElementById("stage");
+
+    root.querySelectorAll("input[data-key], textarea[data-key]").forEach(function(el){
+      el.addEventListener("input", function(){
+        state[el.dataset.key] = el.value;
+        updateMockOnly();
+        saveDraft();
+      });
+    });
+    root.querySelectorAll("input[type=radio][data-key]").forEach(function(el){
+      el.addEventListener("change", function(){
+        state[el.dataset.key] = el.value;
+        render();
+      });
+    });
+    root.querySelectorAll("input[type=file][data-photo]").forEach(function(el){
+      el.addEventListener("change", function(){
+        var file = el.files && el.files[0];
+        if(!file) return;
+        readAndCompressImage(file, function(res){
+          state[el.dataset.photo] = res;
+          render();
+        });
+      });
+    });
+
+    if(id === "convidados"){
+      root.querySelectorAll("input[data-tip-input]").forEach(function(el){
+        el.addEventListener("input", function(){ state.manualDicas[+el.dataset.tipInput] = el.value; saveDraft(); });
+      });
+      root.querySelectorAll("[data-tip-remove]").forEach(function(el){
+        el.addEventListener("click", function(){ state.manualDicas.splice(+el.dataset.tipRemove,1); render(); });
+      });
+      var addTip = document.getElementById("addTip");
+      if(addTip) addTip.addEventListener("click", function(){ state.manualDicas.push(""); render(); });
+    }
+
+    if(id === "memorias"){
+      root.querySelectorAll("input[data-mem-legenda]").forEach(function(el){
+        el.addEventListener("input", function(){ state.memorias[+el.dataset.memLegenda].legenda = el.value; updateMockOnly(); saveDraft(); });
+      });
+      root.querySelectorAll("input[type=file][data-mem-foto]").forEach(function(el){
+        el.addEventListener("change", function(){
+          var file = el.files && el.files[0];
+          if(!file) return;
+          var idx = +el.dataset.memFoto;
+          readAndCompressImage(file, function(res){ state.memorias[idx].foto = res; render(); });
+        });
+      });
+      root.querySelectorAll("[data-mem-remove]").forEach(function(el){
+        el.addEventListener("click", function(){ state.memorias.splice(+el.dataset.memRemove,1); render(); });
+      });
+      var addMem = document.getElementById("addMem");
+      if(addMem) addMem.addEventListener("click", function(){ state.memorias.push({legenda:"",foto:null}); render(); });
+    }
+
+    if(id === "revisao"){
+      document.getElementById("submitBtn").addEventListener("click", submitAnswers);
+      document.getElementById("f_observacoes").addEventListener("input", function(e){ state.observacoes = e.target.value; saveDraft(); });
+    }
+  }
+
+  function submitAnswers(){
+    var btn = document.getElementById("submitBtn");
+    var statusEl = document.getElementById("submitStatus");
+    Object.keys(FIXED).forEach(function(k){ state[k] = FIXED[k]; });
+    var payload = JSON.parse(JSON.stringify(state));
+    payload.submittedAt = new Date().toISOString();
+
+    btn.disabled = true;
+    statusEl.className = "submit-status";
+    statusEl.textContent = "Enviando...";
+
+    fetch("/api/submit", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if(!res.ok) throw new Error("status " + res.status);
+      return res.json();
+    }).then(function(){
+      try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+      renderDone();
+    }).catch(function(){
+      btn.disabled = false;
+      statusEl.className = "submit-status is-error";
+      statusEl.textContent = "Não conseguimos enviar agora. Verifique sua internet e tente de novo.";
+    });
+  }
+
+  btnBack.addEventListener("click", function(){
+    if(current > 1){ current -= 1; render(); window.scrollTo(0,0); }
+  });
+  btnNext.addEventListener("click", function(){
+    if(current > 0 && current < STEP_IDS.length - 1){ current += 1; render(); window.scrollTo(0,0); }
+  });
+  window.addEventListener("scroll", updateScrollCue, {passive:true});
+  window.addEventListener("resize", updateScrollCue);
+
+  function loadPreset(){
+    var slug;
+    try{ slug = new URLSearchParams(location.search).get("p"); }catch(e){ slug = null; }
+    if(!slug) return;
+    fetch("/api/preset?slug=" + encodeURIComponent(slug))
+      .then(function(res){ if(!res.ok) throw new Error("status " + res.status); return res.json(); })
+      .then(function(json){
+        var photos = Array.isArray(json.photos) ? json.photos : [];
+        if(!photos.length) return;
+        state.memorias = photos.map(function(p, i){
+          var existing = state.memorias[i];
+          return { legenda: (existing && existing.legenda) || "", foto: p };
+        });
+        presetLoaded = true;
+        saveDraft();
+        if(STEP_IDS[current] === "memorias") render();
+      })
+      .catch(function(){});
+  }
+
+  render();
+  loadPreset();
+})();
+</script>
+</body>
+</html>

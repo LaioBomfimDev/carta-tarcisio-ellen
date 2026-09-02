@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Respostas — Briefing do Convite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#FBF6EE; --paper-deep:#F1E8D8; --card:#FFFDF8;
+    --ink:#2A2118; --ink-soft:#6B5D4C; --ink-faint:#9C8B76;
+    --accent:#A8455B; --accent-ink:#FCEEF0;
+    --line:rgba(42,33,24,.14); --danger:#B4433A;
+    --display:"Fraunces",Georgia,serif; --body:"Libre Franklin",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#1B1712; --paper-deep:#211C16; --card:#241F19;
+      --ink:#F3EADD; --ink-soft:#C9BBA6; --ink-faint:#8B7E6C;
+      --accent:#E08A9B; --accent-ink:#2A1418;
+      --line:rgba(243,234,221,.14); --danger:#E08A7F;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.5;}
+  h1,h2{font-family:var(--display); font-weight:600; margin:0;}
+  .wrap{max-width:760px; margin:0 auto; padding:1.5rem 1.1rem 4rem;}
+
+  .gate{display:flex; flex-direction:column; align-items:flex-start; gap:1rem; padding-top:3rem;}
+  .gate p{color:var(--ink-soft); max-width:44ch;}
+  .gate input{width:100%; max-width:320px; padding:.7rem .85rem; border:1px solid var(--line); border-radius:9px; background:var(--card); color:var(--ink); font-size:.95rem;}
+  .gate .error{color:var(--danger); font-size:.85rem; min-height:1.2em;}
+
+  .btn{display:inline-flex; align-items:center; gap:.45rem; padding:.65rem 1.2rem; border-radius:999px; border:1px solid var(--line); background:var(--accent); color:var(--accent-ink); font-weight:600; font-size:.9rem; cursor:pointer;}
+  .btn:hover{filter:brightness(1.05);}
+  .btn.ghost{background:transparent; color:var(--ink-soft);}
+
+  .top{display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:1.4rem; flex-wrap:wrap;}
+  .top small{font-family:var(--mono); color:var(--ink-faint); font-size:.78rem;}
+
+  .empty{color:var(--ink-faint); font-style:italic; padding:2rem 0;}
+
+  .card{border:1px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:1rem; overflow:hidden;}
+  .card__head{display:flex; align-items:center; justify-content:space-between; gap:.8rem; padding:1rem 1.1rem; cursor:pointer;}
+  .card__title{font-family:var(--display); font-size:1.15rem; font-weight:600;}
+  .card__meta{font-size:.76rem; color:var(--ink-faint); font-family:var(--mono); margin-top:.2rem;}
+  .card__chev{color:var(--ink-faint); transition:transform .2s; flex:none;}
+  .card.is-open .card__chev{transform:rotate(180deg);}
+  .card__body{display:none; padding:0 1.1rem 1.1rem; border-top:1px solid var(--line);}
+  .card.is-open .card__body{display:block;}
+
+  .section{margin-top:1rem;}
+  .section h3{font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:.4rem;}
+  .section dl{margin:0; display:grid; grid-template-columns:auto 1fr; gap:.3rem .9rem; font-size:.88rem;}
+  .section dt{color:var(--ink-faint);}
+  .section dd{margin:0;}
+
+  .photos{display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.5rem;}
+  .photos figure{margin:0; width:6.5rem;}
+  .photos img{width:100%; height:6.5rem; object-fit:cover; border-radius:8px; border:1px solid var(--line); display:block;}
+  .photos figcaption{font-size:.7rem; color:var(--ink-faint); margin-top:.25rem; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+  .preset-card{margin-bottom:1.4rem;}
+  .preset-card .card__body{display:block;}
+  .preset-hint{color:var(--ink-soft); font-size:.86rem; max-width:56ch; margin:.2rem 0 1rem;}
+  .preset-field{margin-bottom:.9rem;}
+  .preset-field label{display:block; font-size:.86rem; font-weight:600; margin-bottom:.35rem;}
+  .preset-field input[type=text]{width:100%; max-width:360px; padding:.6rem .75rem; border:1px solid var(--line); border-radius:9px; background:var(--card); color:var(--ink); font-size:.94rem;}
+  .preset-photos{display:flex; flex-direction:column; gap:.6rem; margin-bottom:.8rem;}
+  .preset-photo-row{display:flex; align-items:center; gap:.7rem; padding:.6rem; border:1px solid var(--line); border-radius:10px; background:var(--card);}
+  .preset-thumb{width:3rem; height:3rem; border-radius:8px; overflow:hidden; background:var(--paper-deep); flex:none; display:flex; align-items:center; justify-content:center; font-size:.68rem; color:var(--ink-faint);}
+  .preset-thumb img{width:100%; height:100%; object-fit:cover;}
+  .preset-photo-index{flex:none; font-family:var(--mono); font-size:.76rem; color:var(--ink-faint); width:1.2rem;}
+  .preset-photo-name{flex:1; min-width:0; font-size:.82rem; color:var(--ink-soft); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .preset-remove-btn{border:1px solid var(--line); background:transparent; color:var(--ink-faint); width:1.7rem; height:1.7rem; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none;}
+  .preset-remove-btn:hover{border-color:var(--danger); color:var(--danger);}
+  .preset-actions{display:flex; gap:.6rem; flex-wrap:wrap;}
+  .preset-status{margin-top:.6rem; font-size:.85rem; color:var(--ink-soft); min-height:1.2em;}
+  .preset-status.is-error{color:var(--danger); font-weight:600;}
+  .preset-link{margin-top:.6rem; padding:.7rem .9rem; border:1px solid var(--line); border-radius:9px; background:var(--paper-deep); font-family:var(--mono); font-size:.82rem; word-break:break-all;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div id="gate" class="gate">
+    <h1>Respostas do briefing</h1>
+    <p>Área restrita. Digite a senha para ver as respostas enviadas pelos casais.</p>
+    <input id="pw" type="password" placeholder="Senha" autocomplete="current-password" />
+    <button class="btn" id="enterBtn" type="button">Entrar</button>
+    <div class="error" id="gateError"></div>
+  </div>
+
+  <div id="main" style="display:none">
+    <div class="top">
+      <h1>Respostas do briefing</h1>
+      <div>
+        <small id="count"></small>
+        <button class="btn ghost" id="logoutBtn" type="button">Sair</button>
+      </div>
+    </div>
+
+    <div class="card preset-card">
+      <div class="card__head" style="cursor:default;">
+        <div><div class="card__title">Preparar fotos de um casal</div></div>
+      </div>
+      <div class="card__body">
+        <p class="preset-hint">Se as fotos da galeria de memórias já estão definidas, envie-as aqui na ordem certa. O link gerado abre o formulário já com essas fotos — o casal só precisa escrever a legenda de cada uma.</p>
+        <div class="preset-field">
+          <label for="presetSlug">Identificador do casal (vai aparecer no link)</label>
+          <input id="presetSlug" type="text" placeholder="Ex.: eliel-e-anne" />
+        </div>
+        <div class="preset-photos" id="presetPhotos"></div>
+        <div class="preset-actions">
+          <label class="btn ghost" style="cursor:pointer;">+ Adicionar foto<input type="file" accept="image/*" id="presetFileInput" style="display:none" /></label>
+          <button class="btn" id="presetSaveBtn" type="button">Salvar fotos e gerar link</button>
+        </div>
+        <p class="preset-status" id="presetStatus"></p>
+        <div class="preset-link" id="presetLink" style="display:none"></div>
+      </div>
+    </div>
+
+    <div id="list"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var SESSION_KEY = "briefing-admin-key";
+
+  var gate = document.getElementById("gate");
+  var main = document.getElementById("main");
+  var pwInput = document.getElementById("pw");
+  var gateError = document.getElementById("gateError");
+  var listEl = document.getElementById("list");
+  var countEl = document.getElementById("count");
+
+  function esc(s){
+    return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function nonEmpty(v){ return v!=null && String(v).trim()!==""; }
+
+  /* ---------- Preset photo uploader ---------- */
+
+  var presetPhotos = [];
+  var presetPhotosEl = document.getElementById("presetPhotos");
+  var presetSlugInput = document.getElementById("presetSlug");
+  var presetFileInput = document.getElementById("presetFileInput");
+  var presetSaveBtn = document.getElementById("presetSaveBtn");
+  var presetStatusEl = document.getElementById("presetStatus");
+  var presetLinkEl = document.getElementById("presetLink");
+
+  function readAndCompressImage(file, cb){
+    var reader = new FileReader();
+    reader.onload = function(){
+      var img = new Image();
+      img.onload = function(){
+        var maxDim = 1400;
+        var scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        var w = Math.max(1, Math.round(img.width * scale));
+        var h = Math.max(1, Math.round(img.height * scale));
+        var canvas = document.createElement("canvas");
+        canvas.width = w; canvas.height = h;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, w, h);
+        cb({ name: file.name, dataUrl: canvas.toDataURL("image/jpeg", 0.8) });
+      };
+      img.onerror = function(){ cb({ name: file.name, dataUrl: reader.result }); };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function renderPresetPhotos(){
+    presetPhotosEl.innerHTML = presetPhotos.map(function(p, idx){
+      return '<div class="preset-photo-row">'+
+        '<span class="preset-photo-index">'+(idx+1)+'</span>'+
+        '<div class="preset-thumb"><img src="'+p.dataUrl+'" alt="" /></div>'+
+        '<span class="preset-photo-name">'+esc(p.name)+'</span>'+
+        '<button class="preset-remove-btn" type="button" data-preset-remove="'+idx+'" aria-label="Remover foto">✕</button>'+
+      '</div>';
+    }).join("");
+    presetPhotosEl.querySelectorAll("[data-preset-remove]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        presetPhotos.splice(+btn.dataset.presetRemove, 1);
+        renderPresetPhotos();
+      });
+    });
+  }
+
+  presetFileInput.addEventListener("change", function(){
+    var file = presetFileInput.files && presetFileInput.files[0];
+    if(!file) return;
+    readAndCompressImage(file, function(res){
+      presetPhotos.push(res);
+      renderPresetPhotos();
+      presetFileInput.value = "";
+    });
+  });
+
+  presetSaveBtn.addEventListener("click", function(){
+    var slug = presetSlugInput.value.trim();
+    var key = null;
+    try{ key = sessionStorage.getItem(SESSION_KEY); }catch(e){}
+    if(!key){ presetStatusEl.className = "preset-status is-error"; presetStatusEl.textContent = "Entre com a senha primeiro."; return; }
+    if(!slug){ presetStatusEl.className = "preset-status is-error"; presetStatusEl.textContent = "Escolha um identificador para o casal."; return; }
+    if(!presetPhotos.length){ presetStatusEl.className = "preset-status is-error"; presetStatusEl.textContent = "Adicione ao menos uma foto."; return; }
+
+    presetSaveBtn.disabled = true;
+    presetStatusEl.className = "preset-status";
+    presetStatusEl.textContent = "Salvando...";
+    presetLinkEl.style.display = "none";
+
+    fetch("/api/preset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-admin-key": key },
+      body: JSON.stringify({ slug: slug, photos: presetPhotos })
+    }).then(function(res){
+      if(res.status === 401) throw new Error("unauthorized");
+      if(!res.ok) throw new Error("status " + res.status);
+      return res.json();
+    }).then(function(json){
+      presetStatusEl.textContent = "Fotos salvas.";
+      var link = location.origin + "/?p=" + encodeURIComponent(json.slug);
+      presetLinkEl.textContent = link;
+      presetLinkEl.style.display = "block";
+    }).catch(function(err){
+      presetStatusEl.className = "preset-status is-error";
+      presetStatusEl.textContent = err.message === "unauthorized" ? "Senha incorreta." : "Não foi possível salvar agora.";
+    }).finally(function(){
+      presetSaveBtn.disabled = false;
+    });
+  });
+
+  function section(title, rows){
+    var visible = rows.filter(function(r){ return nonEmpty(r[1]); });
+    if(!visible.length) return "";
+    return '<div class="section"><h3>'+esc(title)+'</h3><dl>'+
+      visible.map(function(r){ return '<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>'; }).join("")+
+      '</dl></div>';
+  }
+
+  function photoFigure(label, foto){
+    if(!foto || !foto.dataUrl) return "";
+    return '<figure><img src="'+foto.dataUrl+'" alt="" /><figcaption>'+esc(label)+'</figcaption></figure>';
+  }
+
+  function renderSubmission(entry){
+    var d = entry.data || {};
+    var nomes = [d.noivo1, d.noivo2].filter(nonEmpty).join(" & ") || "(sem nome)";
+    var when = entry.uploadedAt ? new Date(entry.uploadedAt).toLocaleString("pt-BR") : "";
+
+    var photos = [
+      photoFigure("Capa", d.capaFoto),
+      photoFigure("O nosso sim", d.simFoto),
+      photoFigure("Salve a data", d.dataFoto),
+      photoFigure("Agradecimento", d.agradecimentoFoto)
+    ];
+    (d.memorias||[]).forEach(function(m, i){
+      if(m && m.foto) photos.push(photoFigure(m.legenda || ("Memória "+(i+1)), m.foto));
+    });
+
+    var body =
+      section("Sobre", [
+        ["Noivos", nomes],
+        ["Data da cerimônia", d.dataCasamento],
+        ["Horário", d.horaCasamento],
+        ["Cidade", d.cidadeUf]
+      ]) +
+      section("Envelope", [
+        ["Boas-vindas", d.envelopeEyebrow],
+        ["Abertura", "Envelope fechado, sem prévia da carta ou foto"],
+        ["Frase da carta", d.envelopeFrase]
+      ]) +
+      section("Capa", [["Modo", d.capaModo === "pronta" ? "Arte pronta" : d.capaModo === "sem_arte" ? "Sem arte, só as fotos" : "Montar a partir de foto"]]) +
+      section("O nosso sim", [["Categoria", d.simEyebrow], ["Título", d.simTitulo], ["Texto", d.simParagrafo], ["Assinatura", d.simAssinatura], ["Pai de Tarcísio", d.paiNoivo], ["Mãe de Tarcísio", d.maeNoivo], ["Pai de Ellen", d.paiNoiva], ["Mãe de Ellen", d.maeNoiva]]) +
+      section("Salve a data", [["Observação", d.dataObs]]) +
+      section("Cerimônia", [["Local", d.cerimoniaLocal], ["Endereço", d.cerimoniaEndereco], ["Cidade/UF", d.cerimoniaCidadeUf], ["Mapa", d.cerimoniaMapaLink], ["Chegada", d.cerimoniaChegada]]) +
+      section("Para os convidados", [["Prazo RSVP", d.rsvpPrazo], ["Link RSVP", d.rsvpLink], ["Presentes", d.presentesLink], ["Dress code", d.dressCurto], ["Descrição", d.dressDescricao], ["Dica extra", d.dressDica], ["Dicas extras", (d.manualDicas||[]).filter(nonEmpty).join(" · ")]]) +
+      section("Memórias", [["Legendas", (d.memorias||[]).map(function(m){return m && m.legenda;}).filter(nonEmpty).join(" · ")]]) +
+      section("Agradecimento", [["Frase de destaque", d.agradecimentoTitulo], ["Mensagem", d.agradecimentoMensagem], ["Assinatura", d.agradecimentoAssinatura]]) +
+      section("Música", [["Tipo", d.musicaTipo], ["Link Spotify", d.musicaLink], ["Link YouTube", d.musicaLinkYoutube], ["Arquivo", d.musicaObs]]) +
+      section("Observações", [["Nota", d.observacoes]]) +
+      (photos.filter(Boolean).length ? '<div class="section"><h3>Fotos</h3><div class="photos">'+photos.join("")+'</div></div>' : "");
+
+    var card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML =
+      '<div class="card__head">'+
+        '<div><div class="card__title">'+esc(nomes)+'</div><div class="card__meta">'+esc(when)+'</div></div>'+
+        '<span class="card__chev">▾</span>'+
+      '</div>'+
+      '<div class="card__body">'+body+'</div>';
+    card.querySelector(".card__head").addEventListener("click", function(){
+      card.classList.toggle("is-open");
+    });
+    return card;
+  }
+
+  function loadList(key){
+    fetch("/api/list", { headers: { "x-admin-key": key } })
+      .then(function(res){
+        if(res.status === 401) throw new Error("unauthorized");
+        if(!res.ok) throw new Error("status " + res.status);
+        return res.json();
+      })
+      .then(function(json){
+        gate.style.display = "none";
+        main.style.display = "block";
+        var items = json.items || [];
+        countEl.textContent = items.length + (items.length===1 ? " resposta" : " respostas");
+        listEl.innerHTML = "";
+        if(!items.length){
+          listEl.innerHTML = '<p class="empty">Nenhuma resposta enviada ainda.</p>';
+          return;
+        }
+        items.forEach(function(entry){ listEl.appendChild(renderSubmission(entry)); });
+      })
+      .catch(function(err){
+        try{ sessionStorage.removeItem(SESSION_KEY); }catch(e){}
+        gate.style.display = "flex";
+        main.style.display = "none";
+        gateError.textContent = err.message === "unauthorized" ? "Senha incorreta." : "Não foi possível carregar agora.";
+      });
+  }
+
+  document.getElementById("enterBtn").addEventListener("click", function(){
+    var key = pwInput.value;
+    if(!key) return;
+    try{ sessionStorage.setItem(SESSION_KEY, key); }catch(e){}
+    gateError.textContent = "";
+    loadList(key);
+  });
+  pwInput.addEventListener("keydown", function(e){
+    if(e.key === "Enter") document.getElementById("enterBtn").click();
+  });
+  document.getElementById("logoutBtn").addEventListener("click", function(){
+    try{ sessionStorage.removeItem(SESSION_KEY); }catch(e){}
+    main.style.display = "none";
+    gate.style.display = "flex";
+    pwInput.value = "";
+  });
+
+  try{
+    var saved = sessionStorage.getItem(SESSION_KEY);
+    if(saved) loadList(saved);
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
