@@ -9,6 +9,7 @@ const currentPageLabel = document.querySelector("#currentPage");
 const totalPagesLabel = document.querySelector("#totalPages");
 const pageTitle = document.querySelector("#pageTitle");
 const gestureTip = document.querySelector("#gestureTip");
+const pageScrollCue = document.querySelector("#pageScrollCue");
 const musicControl = document.querySelector("#musicControl");
 const music = document.querySelector("#backgroundMusic");
 const musicDialog = document.querySelector("#musicDialog");
@@ -26,6 +27,22 @@ let musicAvailable = false;
 let soundContext;
 
 totalPagesLabel.textContent = String(sheets.length);
+
+const updatePageScrollCue = () => {
+  const activeSheet = sheets[currentPage];
+  const activeScroll = activeSheet?.querySelector(".page-scroll");
+  const remainingScroll = activeScroll
+    ? activeScroll.scrollHeight - activeScroll.clientHeight - activeScroll.scrollTop
+    : 0;
+  const shouldShow = invitationOpened && !pageIsTurning && remainingScroll > 12;
+
+  pageScrollCue.hidden = !shouldShow;
+  pageScrollCue.classList.toggle("is-on-dark", Boolean(activeSheet?.querySelector(".dark-page")));
+};
+
+const scheduleScrollCueUpdate = () => {
+  requestAnimationFrame(() => requestAnimationFrame(updatePageScrollCue));
+};
 
 const arrangeSheets = () => {
   sheets.forEach((sheet, index) => {
@@ -46,6 +63,7 @@ const arrangeSheets = () => {
   nextButton.disabled = currentPage === sheets.length - 1;
   currentPageLabel.textContent = String(currentPage + 1);
   pageTitle.textContent = sheets[currentPage].dataset.title;
+  scheduleScrollCueUpdate();
 };
 
 const playPageSound = () => {
@@ -86,6 +104,7 @@ const finishTurn = (sheet) => {
 const nextPage = () => {
   if (pageIsTurning || currentPage >= sheets.length - 1) return;
   pageIsTurning = true;
+  pageScrollCue.hidden = true;
   gestureTip.classList.add("is-hidden");
   playPageSound();
 
@@ -99,6 +118,7 @@ const nextPage = () => {
 const previousPage = () => {
   if (pageIsTurning || currentPage <= 0) return;
   pageIsTurning = true;
+  pageScrollCue.hidden = true;
   playPageSound();
 
   const incomingSheet = sheets[currentPage - 1];
@@ -292,5 +312,16 @@ lightbox.addEventListener("click", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
 });
+
+document.querySelectorAll(".page-scroll").forEach((scrollArea) => {
+  scrollArea.addEventListener("scroll", updatePageScrollCue, { passive: true });
+});
+
+document.querySelectorAll(".page-scroll img").forEach((img) => {
+  if (!img.complete) img.addEventListener("load", scheduleScrollCueUpdate, { once: true });
+});
+
+window.addEventListener("resize", scheduleScrollCueUpdate, { passive: true });
+document.fonts?.ready.then(scheduleScrollCueUpdate);
 
 arrangeSheets();
