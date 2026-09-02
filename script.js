@@ -126,18 +126,10 @@ book.addEventListener("pointerup", (event) => {
   const deltaX = event.clientX - pointerStart.x;
   const deltaY = event.clientY - pointerStart.y;
   const elapsed = performance.now() - pointerStart.time;
-  const bounds = book.getBoundingClientRect();
-  const localX = event.clientX - bounds.left;
   pointerStart = null;
 
   if (Math.abs(deltaX) > 44 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15 && elapsed < 900) {
     deltaX < 0 ? nextPage() : previousPage();
-    return;
-  }
-
-  if (Math.abs(deltaX) < 8 && Math.abs(deltaY) < 8) {
-    if (localX > bounds.width * 0.84) nextPage();
-    if (localX < bounds.width * 0.16) previousPage();
   }
 });
 
